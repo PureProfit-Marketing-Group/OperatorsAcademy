@@ -48,3 +48,31 @@ Set up Operators Academy as a deployable React app and launched to production on
 - [ ] Consider adding the Word doc content or removing it
 - [ ] Add a custom domain if desired
 - [ ] Consider adding meta tags for SEO/social sharing
+
+---
+
+## 2026-02-11 — Session 2
+
+### Summary
+Added a new course section covering the experimental Agent Teams feature in Claude Code.
+
+### Completed
+- [x] Fetched and analyzed full Agent Teams documentation from code.claude.com
+- [x] Added section "2.7 Agent Teams (Experimental)" to Module 2 in OperatorAcademy.jsx
+- [x] Content covers: what Agent Teams are, architecture, comparison with subagents, enabling, use cases, starting a team, and all current limitations
+- [x] Added analogy (war room specialists) and pro tip (start with research tasks)
+- [x] Added "Agent Teams" glossary entry
+- [x] Verified build succeeds
+
+### Files Changed
+- `src/OperatorAcademy.jsx` — Added section 2.7 and glossary entry
+
+### Decisions Made
+- Placed Agent Teams as section 2.7 within Module 2 (Claude Code) since it's a Claude Code feature
+- Covered the full feature overview rather than just limitations, so readers have context
+
+### Next Steps
+- [ ] Consider adding the Word doc content or removing it
+- [ ] Add a custom domain if desired
+- [ ] Consider adding meta tags for SEO/social sharing
+- [ ] Deploy updated build to Vercel

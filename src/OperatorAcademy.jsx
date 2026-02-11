@@ -232,6 +232,72 @@ Skills are reusable capabilities you can give Claude — like knowing how to use
 • Use \`/compact\` when context is getting full but you want to continue
 • Use \`/clear\` when starting a new task (keeps settings, clears conversation)`,
         tip: "Claude Code works best when it's opened inside a specific project folder. This way, it can see all your project files and make changes to them directly."
+      },
+      {
+        title: "2.7 Agent Teams (Experimental)",
+        content: `Agent Teams let you coordinate **multiple Claude Code instances** working together on the same project. One session acts as the **team lead**, while other sessions called **teammates** work independently in their own context windows.
+
+**Why Agent Teams?**
+When a task benefits from parallel exploration — like reviewing code from multiple angles, building independent modules, or investigating competing debugging hypotheses — a single Claude session can become a bottleneck. Agent Teams solve this by splitting work across multiple sessions that can communicate directly with each other.
+
+**How It Works:**
+
+| Component | Role |
+|-----------|------|
+| **Team Lead** | The main session that creates the team, spawns teammates, and coordinates work |
+| **Teammates** | Separate Claude Code instances that each work on assigned tasks |
+| **Task List** | Shared list of work items that teammates claim and complete |
+| **Mailbox** | Messaging system for communication between agents |
+
+**Agent Teams vs. Subagents:**
+
+| Feature | Subagents | Agent Teams |
+|---------|-----------|-------------|
+| **Context** | Share the main agent's session | Fully independent context windows |
+| **Communication** | Report results back to caller only | Teammates message each other directly |
+| **Best For** | Focused tasks where only the result matters | Complex work requiring discussion and collaboration |
+| **Token Cost** | Lower | Higher — each teammate is a separate instance |
+
+**Enabling Agent Teams:**
+Agent Teams are disabled by default. Enable them by adding this to your \`settings.json\`:
+
+\`\`\`
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  }
+}
+\`\`\`
+
+**Best Use Cases:**
+• **Research and review** — Multiple teammates investigate different aspects simultaneously
+• **New modules or features** — Each teammate owns a separate piece without conflicts
+• **Debugging with competing hypotheses** — Test different theories in parallel
+• **Cross-layer coordination** — Frontend, backend, and tests each owned by a different teammate
+
+**Starting a Team:**
+Just describe the task and team structure in natural language:
+
+\`\`\`
+Create an agent team to review PR #142. Spawn three reviewers:
+- One focused on security implications
+- One checking performance impact
+- One validating test coverage
+Have them each review and report findings.
+\`\`\`
+
+**Current Limitations:**
+Agent Teams are experimental. Be aware of these constraints:
+
+• **No session resumption** — \`/resume\` and \`/rewind\` do not restore in-process teammates
+• **Task status can lag** — Teammates sometimes fail to mark tasks as completed, blocking dependent tasks
+• **One team per session** — Clean up the current team before starting a new one
+• **No nested teams** — Teammates cannot spawn their own teams
+• **Lead is fixed** — You can't promote a teammate to lead or transfer leadership
+• **Permissions set at spawn** — All teammates inherit the lead's permission mode
+• **Split panes require tmux or iTerm2** — The default in-process mode works in any terminal, but split-pane mode isn't supported in VS Code terminal, Windows Terminal, or Ghostty`,
+        analogy: "Think of Agent Teams like a war room with specialists. The team lead is the general assigning missions, and each teammate is a specialist working independently on their piece — the sniper scouts, the engineer builds, the medic patches things up. They can radio each other directly, but the general keeps the big picture.",
+        tip: "Start with research and review tasks before trying parallel code implementation. Agent Teams add coordination overhead, so they work best when teammates can operate independently on different files or aspects of a problem."
       }
     ]
   },
@@ -421,6 +487,7 @@ Claude will analyze your project and create all the documentation files automati
 // ==================== GLOSSARY DATA ====================
 const glossaryTerms = [
   { term: "Agent", definition: "A specialized Claude configuration for specific tasks with particular instructions, personality, or capabilities.", category: "Claude Code" },
+  { term: "Agent Teams", definition: "An experimental feature that coordinates multiple Claude Code instances working together — one lead session spawns teammates that work independently, communicate directly, and share a task list.", category: "Claude Code" },
   { term: "Artifact", definition: "A separate panel where Claude creates documents, code, diagrams, or interactive tools that you can copy, download, or share.", category: "Claude.ai" },
   { term: "cd", definition: "Change Directory - Terminal command to navigate into a folder. Use 'cd ..' to go up one level.", category: "Terminal" },
   { term: "Claude Code", definition: "An AI-powered development tool that runs in your terminal and can create actual applications and files.", category: "Tools" },
