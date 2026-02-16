@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { BookOpen, Terminal, Cpu, Workflow, Link2, FileText, StickyNote, ChevronRight, ChevronLeft, Check, Circle, Lightbulb, AlertTriangle, Target, Home, List, Menu, X, Trash2, Plus, Search, TrendingUp } from 'lucide-react';
+import { BookOpen, Terminal, Cpu, Workflow, Link2, FileText, StickyNote, ChevronRight, ChevronLeft, Check, Circle, Lightbulb, AlertTriangle, Target, Home, List, Menu, X, Trash2, Plus, Search, TrendingUp, Bot } from 'lucide-react';
 
 // ==================== COURSE DATA ====================
 const courseData = {
@@ -940,6 +940,571 @@ This isn't theory — it's a repeatable system. Every business can follow this p
       }
     ]
   },
+  module6: {
+    title: "Module 6: OpenClaw",
+    subtitle: "Your Personal AI Agent, Running 24/7",
+    icon: Bot,
+    sections: [
+      {
+        title: "6.1 Your AI Agent That Never Sleeps",
+        content: `Imagine texting an assistant at 2 AM that checks your email, schedules your meetings, scrapes competitor pricing, and pushes code to GitHub — all before you wake up.
+
+That's **OpenClaw**.
+
+OpenClaw is an open-source personal AI agent that lives on your own hardware, connects to your messaging apps, and actually *does things* on your behalf. Not "here's a summary" — actual execution. File management. Browser automation. Shell commands. API calls. All triggered from a WhatsApp message or a Telegram chat.
+
+**What makes it different from ChatGPT or Claude.ai:**
+
+| Feature | ChatGPT / Claude.ai | OpenClaw |
+|---------|---------------------|----------|
+| **Runs where?** | Their servers | Your machine |
+| **Can access your files?** | No | Yes |
+| **Can run terminal commands?** | No | Yes |
+| **Can control a browser?** | No | Yes |
+| **Works via text/WhatsApp?** | No | Yes |
+| **Persistent memory?** | Limited | Full — learns your preferences over time |
+| **Works while you sleep?** | No | Yes — 24/7 autonomous operation |
+| **Your data stays private?** | No | Yes — nothing leaves your machine |
+
+**50+ integrations out of the box:** Gmail, GitHub, Spotify, Obsidian, Twitter, Google Calendar, Slack, and more. The community builds new skills daily on **ClawHub** — and OpenClaw can even create and modify its own skills through conversation.
+
+People are calling it "what Apple Intelligence should have been." The community exploded so fast that Mac Mini stock sold out across major retailers. Tom's Hardware reported delivery delays of up to 6 weeks for high-memory configurations.
+
+This module walks you through setting it up — affordably, securely, and without the trial-and-error that burns most people out.`,
+        analogy: "ChatGPT is like calling a knowledgeable friend for advice. OpenClaw is like hiring a full-time assistant who sits at your desk, has your passwords, knows your preferences, and works while you're asleep.",
+        tip: "OpenClaw is open-source and free. The software costs nothing. You only pay for hardware (or a cheap VPS) and API calls if you use cloud models like Claude or GPT-4. With the right setup, that's under $10/month."
+      },
+      {
+        title: "6.2 Why Everyone's Buying Mac Minis (And Why You Don't Have To)",
+        content: `You've seen the tweets. You've seen the Reddit threads. Developers are panic-buying Mac Minis like they're limited-edition sneakers. But here's what nobody tells you: **most people don't need a Mac Mini to run OpenClaw.**
+
+**Why the Mac Mini became the default:**
+
+The Mac Mini emerged as the go-to OpenClaw host for one reason above all others: **iMessage**. In the US, iMessage is how most people text. If you want OpenClaw responding to your iMessages, you need macOS. And the cheapest way to get macOS is a Mac Mini.
+
+**Other reasons people buy dedicated hardware:**
+• **Isolation** — A dedicated machine keeps your AI agent separate from your personal data
+• **Always-on** — Mac Minis idle at under 5 watts. Quieter than a nightlight
+• **Apple Silicon** — Unified memory architecture makes local AI models run faster than equivalent x86 hardware
+• **Reliability** — macOS doesn't randomly restart for updates at 3 AM
+
+**The real cost breakdown:**
+
+| Option | Upfront Cost | Monthly Cost | iMessage? |
+|--------|-------------|-------------|-----------|
+| New Mac Mini M4 (16GB) | $599 | $1-8 (API calls) | Yes |
+| New Mac Mini M4 (32GB) | $799 | $1-8 (API calls) | Yes |
+| Used Mac Mini M1 (16GB) | $350-500 | $1-8 (API calls) | Yes |
+| Hetzner VPS (2 vCPU, 2GB) | $0 | $4/month + API | No |
+| Oracle Cloud Free Tier | $0 | $0-8 (API only) | No |
+| Hostinger VPS | $0 | $5-13/month + API | No |
+
+**The hidden cost nobody talks about: API bills.**
+
+Early adopters report spending **$300-750/month** on cloud LLM API calls when using models like Claude or GPT-4. OpenClaw's agent makes many reasoning calls per task — those tokens add up fast.
+
+The solution? Use local models with **Ollama** for routine tasks and only route complex requests to cloud APIs. We'll cover this in the cost management section.
+
+**The bottom line:** If you need iMessage integration, a used M1 Mac Mini for $350-400 is the sweet spot. If you don't need iMessage, a $4/month VPS does everything else — and you can start in 20 minutes instead of waiting for shipping.`,
+        analogy: "Buying a new Mac Mini for OpenClaw is like buying a brand-new truck to drive to the grocery store. It works — but a reliable used car gets you there just fine. Pick the vehicle that matches the trip.",
+        tip: "Check Facebook Marketplace and local listings for M1 Mac Minis. Since the M4 launched, M1 prices dropped significantly. A used M1 with 16GB runs OpenClaw perfectly for cloud API usage."
+      },
+      {
+        title: "6.3 Choose Your Setup Path",
+        content: `Before you install anything, pick the path that fits your needs and budget. There's no wrong answer — each has trade-offs.
+
+**Path A: Remote VPS (Best for most people)**
+
+• **Cost:** $0-13/month for the server + $1-8/month for API calls
+• **Setup time:** 20-30 minutes
+• **Best for:** WhatsApp, Telegram, Discord, Slack, Signal users
+• **Not for:** iMessage users (requires macOS)
+• **Skill level:** Beginner-friendly with our walkthrough
+
+This is the path we recommend for most Operators Academy students. It's the fastest, cheapest way to get a working OpenClaw agent. You get a cloud server that runs 24/7, no hardware to buy, and you can manage it from anywhere.
+
+**Recommended VPS providers:**
+
+| Provider | Price | RAM | Standout Feature |
+|----------|-------|-----|-----------------|
+| **Oracle Cloud** | Free | 1-4GB | Free tier is generous, but can be unreliable |
+| **Hetzner** | $4/mo | 2GB | Best value for stability |
+| **Hostinger** | $5-13/mo | 2-8GB | One-click Docker deployment |
+
+**Path B: Local Mac Mini (For iMessage + power users)**
+
+• **Cost:** $350-800 upfront + $1-8/month for API calls
+• **Setup time:** 45-60 minutes
+• **Best for:** iMessage users, privacy maximalists, local model enthusiasts
+• **Skill level:** Intermediate
+
+Choose this if iMessage is a must-have or you want to run AI models locally with zero cloud dependency. A used M1 Mac Mini is the budget sweet spot.
+
+**Path C: Hybrid (Maximum flexibility)**
+
+• **Cost:** $350-800 upfront + $4/mo VPS + API calls
+• **Setup time:** 60-90 minutes
+• **Best for:** Power users who want the best of both worlds
+• **Skill level:** Intermediate to advanced
+
+Run OpenClaw on a Mac Mini for iMessage, plus a VPS instance for always-on redundancy. If your Mac Mini goes offline, the VPS takes over for non-iMessage channels.
+
+**Decision tree:**
+
+Do you need iMessage?
+• **Yes** → Path B (Mac Mini) or Path C (Hybrid)
+• **No** → Path A (VPS) — save $350+ and start today
+
+Are you comfortable with terminal commands?
+• **Yes** → Any path works
+• **Not yet** → Path A with Hostinger's one-click Docker setup
+
+Is privacy your top concern?
+• **Yes** → Path B with local Ollama models (zero cloud dependency)
+• **Not critical** → Path A is simpler and cheaper`,
+        analogy: "Choosing your setup path is like choosing where to live. A VPS is renting an apartment — cheap, fast move-in, someone else handles maintenance. A Mac Mini is buying a house — more upfront cost, but it's yours, and you can do whatever you want with it.",
+        tip: "Start with Path A (VPS) even if you plan to go local later. It takes 20 minutes, costs $4/month, and teaches you how OpenClaw works before you invest in hardware. Think of it as a test drive."
+      },
+      {
+        title: "6.4 Remote Setup: Your AI Agent for $4/Month",
+        content: `This walkthrough gets OpenClaw running on a Hetzner VPS. By the end, you'll have a 24/7 AI agent you can message from your phone.
+
+**Step 1: Create Your VPS**
+
+1. Sign up at **hetzner.com** (or your preferred VPS provider)
+2. Create a new server:
+   • **OS:** Ubuntu 22.04
+   • **Type:** CX22 (2 vCPU, 4GB RAM) — $4.59/month
+   • **Location:** Pick the closest data center to you
+   • **SSH Key:** Add your public key (or use password auth to start)
+3. Note your server's IP address
+
+**Step 2: Connect to Your Server**
+
+Open your terminal and SSH in:
+
+\`\`\`
+ssh root@YOUR_SERVER_IP
+\`\`\`
+
+**Step 3: Install Docker**
+
+Docker keeps OpenClaw isolated and makes updates painless:
+
+\`\`\`
+curl -fsSL https://get.docker.com | sh
+\`\`\`
+
+**Step 4: Install OpenClaw**
+
+Run the one-liner installer:
+
+\`\`\`
+curl -fsSL https://openclaw.ai/install.sh | bash
+\`\`\`
+
+The installer handles Node.js, dependencies, and initial configuration. Follow the prompts to:
+• Choose your AI model provider (Claude, OpenAI, or local via Ollama)
+• Enter your API key
+• Set your admin password
+
+**Step 5: Configure Your Model**
+
+For the most cost-effective setup, use Claude Haiku for routine tasks:
+
+\`\`\`
+openclaw config set model claude-haiku-4-5-20251001
+\`\`\`
+
+For complex tasks that need more reasoning power:
+
+\`\`\`
+openclaw config set fallback-model claude-sonnet-4-5-20250929
+\`\`\`
+
+**Step 6: Start OpenClaw as a Background Service**
+
+\`\`\`
+openclaw start --daemon
+\`\`\`
+
+This runs OpenClaw in the background. It survives server reboots and restarts automatically if it crashes.
+
+**Step 7: Verify It's Running**
+
+\`\`\`
+openclaw status
+\`\`\`
+
+You should see: \`Status: Running | Uptime: Xs | Model: claude-haiku\`
+
+**What you've built so far:**
+Your AI agent is live on a server, running 24/7, waiting for instructions. Next, we'll connect it to your messaging apps so you can talk to it from your phone.`,
+        analogy: "Setting up a VPS for OpenClaw is like renting a tiny office for your new employee. You don't need a corner office with a view — you need a desk, a chair, and a power outlet. A $4/month server is that desk.",
+        tip: "Set a billing alert on your VPS provider for $10/month. This catches any unexpected charges early. Hetzner and most providers let you set this up in the billing dashboard."
+      },
+      {
+        title: "6.5 Local Setup: Mac Mini Configuration",
+        content: `If you chose Path B (local Mac Mini), this section walks you through turning it into a dedicated OpenClaw server.
+
+**Before You Start:**
+• A Mac Mini (M1 or newer, 16GB RAM minimum)
+• macOS 14 Sonoma or later
+• An Ethernet cable (more reliable than Wi-Fi for always-on operation)
+• Your AI model API key (Anthropic or OpenAI)
+
+**Step 1: Prepare Your Mac Mini for Server Duty**
+
+These settings prevent your Mac from going to sleep or interrupting OpenClaw:
+
+1. **System Settings > Energy** → Turn off "Put hard disks to sleep"
+2. **System Settings > Energy** → Set "Prevent automatic sleeping" to ON
+3. **System Settings > Lock Screen** → Set "Start Screen Saver" to Never
+4. **System Settings > Software Update** → Turn off automatic updates (update manually on your schedule)
+
+**Step 2: Enable Remote Access**
+
+So you can manage your Mac Mini from any other device:
+
+1. **System Settings > General > Sharing** → Turn on **Remote Login (SSH)**
+2. Note the SSH command shown (e.g., \`ssh username@192.168.1.x\`)
+3. Optionally enable **Screen Sharing** for GUI access
+
+**Step 3: Install Homebrew and Node.js**
+
+Open Terminal and run:
+
+\`\`\`
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install node
+\`\`\`
+
+**Step 4: Install OpenClaw**
+
+\`\`\`
+curl -fsSL https://openclaw.ai/install.sh | bash
+\`\`\`
+
+Follow the installer prompts to configure your model provider and API key.
+
+**Step 5: Install the Menubar App (Optional)**
+
+OpenClaw offers a macOS menubar companion app (beta) for quick status checks:
+
+\`\`\`
+brew install --cask openclaw
+\`\`\`
+
+This shows a small icon in your menu bar with agent status, recent activity, and quick controls.
+
+**Step 6: Set Up Auto-Start on Boot**
+
+Create a launch agent so OpenClaw starts automatically when your Mac boots:
+
+\`\`\`
+openclaw service install
+\`\`\`
+
+This registers OpenClaw as a macOS LaunchAgent that starts on login and restarts if it crashes.
+
+**Step 7: Set Up Local Models with Ollama (Optional)**
+
+For zero API costs on routine tasks:
+
+\`\`\`
+brew install ollama
+ollama pull llama3.2
+openclaw config set model ollama/llama3.2
+openclaw config set fallback-model claude-sonnet-4-5-20250929
+\`\`\`
+
+This runs a local model for simple requests and only calls Claude for complex tasks — cutting your API bill by 70-90%.
+
+**Step 8: Configure iMessage Integration**
+
+This is the feature that justifies the Mac Mini. In the OpenClaw config:
+
+\`\`\`
+openclaw integrations enable imessage
+\`\`\`
+
+OpenClaw will request permission to access Messages. Grant it, and you can now text your agent like any contact.
+
+**You're live.** Your Mac Mini is now a personal AI server running 24/7 with iMessage access, local model support, and cloud fallback for complex reasoning.`,
+        analogy: "Configuring a Mac Mini for OpenClaw is like converting a spare bedroom into a home office. You disable the things that interrupt work (sleep settings, auto-updates), set up remote access (so you can check in from anywhere), and make sure it starts fresh every morning (auto-launch on boot).",
+        tip: "Connect your Mac Mini via Ethernet, not Wi-Fi. A dropped Wi-Fi connection at 3 AM means your agent goes offline until you notice. Ethernet is one cable that eliminates this failure mode entirely."
+      },
+      {
+        title: "6.6 Connecting Your Messaging Apps",
+        content: `Your agent is running. Now let's make it reachable from your phone. OpenClaw supports 8 messaging platforms — pick the ones you actually use.
+
+**WhatsApp (Most Popular)**
+
+WhatsApp is the most-used integration worldwide. Setup takes 5 minutes:
+
+\`\`\`
+openclaw integrations enable whatsapp
+\`\`\`
+
+1. OpenClaw generates a QR code in your terminal
+2. Open WhatsApp on your phone → Settings → Linked Devices → Link a Device
+3. Scan the QR code
+4. Send a test message: "Hey, are you there?"
+
+Your agent now lives in your WhatsApp as a linked device. Message it like a contact, and it responds.
+
+**Telegram**
+
+Telegram requires creating a bot through BotFather:
+
+1. Message **@BotFather** on Telegram
+2. Send \`/newbot\` and follow the prompts to name your bot
+3. Copy the bot token BotFather gives you
+4. Run:
+
+\`\`\`
+openclaw integrations enable telegram --token YOUR_BOT_TOKEN
+\`\`\`
+
+5. Message your bot on Telegram to test
+
+**Discord**
+
+For Discord, you create a bot application:
+
+1. Go to the Discord Developer Portal → Applications → New Application
+2. Go to Bot → Add Bot → Copy the token
+3. Under OAuth2 → URL Generator, select \`bot\` scope with \`Send Messages\` + \`Read Message History\`
+4. Use the generated URL to invite the bot to your server
+5. Run:
+
+\`\`\`
+openclaw integrations enable discord --token YOUR_BOT_TOKEN
+\`\`\`
+
+**Slack**
+
+\`\`\`
+openclaw integrations enable slack
+\`\`\`
+
+Follow the OAuth flow that opens in your browser. Select your workspace and grant permissions.
+
+**Signal**
+
+\`\`\`
+openclaw integrations enable signal
+\`\`\`
+
+Signal uses a linked device approach similar to WhatsApp — scan a QR code with your Signal app.
+
+**iMessage (Mac Mini Only)**
+
+If you're running on macOS:
+
+\`\`\`
+openclaw integrations enable imessage
+\`\`\`
+
+Grant Messages access when prompted. Your agent becomes reachable via iMessage to anyone who has your Apple ID.
+
+**Managing Multiple Channels:**
+
+You can enable as many integrations as you want. OpenClaw handles them all simultaneously:
+
+\`\`\`
+openclaw integrations list
+\`\`\`
+
+This shows all active integrations, their status, and message counts.
+
+| Integration | Setup Difficulty | Works on VPS? | Works on Mac? |
+|-------------|-----------------|---------------|---------------|
+| WhatsApp | Easy (QR scan) | Yes | Yes |
+| Telegram | Easy (bot token) | Yes | Yes |
+| Discord | Medium (developer portal) | Yes | Yes |
+| Slack | Easy (OAuth flow) | Yes | Yes |
+| Signal | Easy (QR scan) | Yes | Yes |
+| iMessage | Easy (one command) | No | Yes |
+| Google Chat | Medium (service account) | Yes | Yes |
+| MS Teams | Medium (Azure app) | Yes | Yes |`,
+        analogy: "Connecting messaging apps to OpenClaw is like giving your assistant phone numbers for different offices. WhatsApp is the main line, Telegram is the back channel, Discord is the team chat, and iMessage is the personal line. Same assistant, different ways to reach them.",
+        tip: "Start with one messaging app — whichever you use most. Get comfortable with that workflow before adding more channels. Each integration is independent, so you can add them anytime."
+      },
+      {
+        title: "6.7 Keeping Costs Under $10/Month",
+        content: `The number one reason people abandon OpenClaw isn't setup difficulty — it's the surprise API bill at the end of the month. OpenClaw agents are verbose. Every task involves multiple reasoning steps, each burning tokens. Without guardrails, costs spiral fast.
+
+Here's how to keep your total bill under $10/month.
+
+**Understanding Where the Money Goes:**
+
+| Cost Component | Typical Range | Can You Reduce It? |
+|----------------|--------------|-------------------|
+| VPS hosting | $0-13/month | Yes — use free tiers or Hetzner |
+| Cloud LLM API calls | $1-750/month | Yes — this is where optimization matters |
+| Local model (Ollama) | $0 | Free, but needs capable hardware |
+
+**Strategy 1: Model Routing — Use Cheap Models by Default**
+
+The biggest cost saver. Route simple tasks to cheap models and only use expensive models when needed:
+
+\`\`\`
+openclaw config set model claude-haiku-4-5-20251001
+openclaw config set fallback-model claude-sonnet-4-5-20250929
+openclaw config set fallback-threshold complex
+\`\`\`
+
+**Cost comparison per task:**
+
+| Model | Cost per 1M Input Tokens | Cost per 1M Output Tokens | Typical Task Cost |
+|-------|-------------------------|--------------------------|-------------------|
+| Claude Haiku 4.5 | $0.80 | $4.00 | $0.002-0.01 |
+| Claude Sonnet 4.5 | $3.00 | $15.00 | $0.01-0.05 |
+| Claude Opus 4.6 | $15.00 | $75.00 | $0.05-0.25 |
+| Local (Ollama) | Free | Free | $0.00 |
+
+Using Haiku for 90% of tasks and Sonnet for the rest keeps most users at **$5-15/month** in API costs.
+
+**Strategy 2: Set Hard Spending Limits**
+
+Both Anthropic and OpenAI let you set monthly spending caps:
+
+• **Anthropic Console** → Settings → Spending Limits → Set to $20/month
+• **OpenAI Dashboard** → Billing → Usage Limits → Set hard cap
+
+If you hit the cap, OpenClaw falls back to local models or pauses until next month.
+
+**Strategy 3: Use Local Models for Routine Work**
+
+If you're on a Mac Mini, install Ollama and run a local model for free:
+
+\`\`\`
+ollama pull llama3.2
+openclaw config set model ollama/llama3.2
+\`\`\`
+
+Local models handle simple tasks well: reminders, basic lookups, file organization, quick answers. Route only tasks that need deep reasoning to cloud APIs.
+
+**Strategy 4: Reduce Agent Verbosity**
+
+OpenClaw agents can be chatty in their reasoning. Trim the fat:
+
+\`\`\`
+openclaw config set max-reasoning-tokens 2048
+openclaw config set summarize-context true
+\`\`\`
+
+This caps how much the agent "thinks" per step and compresses conversation history — fewer tokens sent, lower costs.
+
+**Strategy 5: Monitor and Alert**
+
+Set up a daily cost check:
+
+\`\`\`
+openclaw config set daily-cost-alert 0.50
+\`\`\`
+
+If spending exceeds $0.50 in a day, OpenClaw notifies you through your connected messaging app.
+
+**Realistic Monthly Budget:**
+
+| Setup | Hosting | API Costs | Total |
+|-------|---------|-----------|-------|
+| VPS + Haiku only | $4 | $2-5 | **$6-9/month** |
+| VPS + Haiku + Sonnet fallback | $4 | $5-15 | **$9-19/month** |
+| Mac Mini + Ollama local | $0 (owned) | $0-5 | **$0-5/month** |
+| Mac Mini + Haiku cloud | $0 (owned) | $2-8 | **$2-8/month** |`,
+        analogy: "Managing OpenClaw costs is like managing a phone plan. You wouldn't use international roaming for every call when Wi-Fi calling is free. Use local models (Wi-Fi) for everyday tasks and cloud APIs (roaming) only when you need the premium connection.",
+        tip: "Check your Anthropic or OpenAI usage dashboard weekly for the first month. Most people find a stable usage pattern within 2-3 weeks. Once you know your pattern, set your spending cap 20% above your average."
+      },
+      {
+        title: "6.8 Security: Locking Down Your Agent",
+        content: `OpenClaw has full access to your machine. It can read files, run commands, and control a browser. That's what makes it powerful — and what makes security non-negotiable.
+
+**The Real Risks:**
+
+• **Prompt injection** — Someone sends your agent a message containing hidden instructions (via email, chat, or a webpage). The agent follows the hidden instructions instead of your intent
+• **Data exposure** — Your agent reads a file containing API keys or passwords and includes them in a response
+• **Unintended actions** — A poorly-worded request causes the agent to delete files, send messages, or modify data you didn't intend
+
+**These aren't hypothetical.** Security researchers have demonstrated prompt injection attacks that extract .env files and SSH keys from OpenClaw instances running without guardrails.
+
+**Layer 1: Run in Docker (Required for VPS, Recommended for Mac)**
+
+Docker containers isolate OpenClaw from your host system:
+
+\`\`\`
+openclaw config set runtime docker
+openclaw config set docker-volumes /safe/data:/data
+\`\`\`
+
+This means OpenClaw can only access files you explicitly mount into the container — not your entire filesystem.
+
+**Layer 2: Restrict File Access**
+
+Even within Docker, limit what directories OpenClaw can reach:
+
+\`\`\`
+openclaw config set allowed-paths /data,/projects
+openclaw config set blocked-paths /secrets,/.ssh,/.env
+\`\`\`
+
+**Layer 3: Require Confirmation for Risky Actions**
+
+Configure OpenClaw to ask before executing destructive commands:
+
+\`\`\`
+openclaw config set confirm-actions delete,send,push,deploy
+\`\`\`
+
+When the agent tries to delete a file, send a message on your behalf, push code, or deploy something, it pauses and asks you first.
+
+**Layer 4: Separate API Keys**
+
+Create a dedicated API key for OpenClaw with limited permissions — don't reuse your personal key:
+
+• **Anthropic** → Console → API Keys → Create new key with usage limits
+• **OpenAI** → Dashboard → API Keys → Create new project key
+
+If the key is ever compromised, your personal account stays safe.
+
+**Layer 5: Network Restrictions (Advanced)**
+
+On a VPS, use firewall rules to limit what your agent can connect to:
+
+\`\`\`
+ufw allow ssh
+ufw allow out to any port 443
+ufw default deny incoming
+ufw enable
+\`\`\`
+
+This allows HTTPS traffic (for API calls) and SSH (for your management) while blocking everything else.
+
+**Security Checklist:**
+
+| Action | Priority | Done? |
+|--------|----------|-------|
+| Run in Docker container | Critical | |
+| Set allowed/blocked file paths | Critical | |
+| Use a dedicated API key with spending limits | High | |
+| Enable confirmation for destructive actions | High | |
+| Keep OpenClaw updated (\`openclaw update\`) | High | |
+| Set up firewall rules (VPS) | Medium | |
+| Review agent activity logs weekly | Medium | |
+| Disable integrations you don't use | Low | |
+
+**One more thing:** Update OpenClaw regularly. The project moves fast, and security patches ship frequently:
+
+\`\`\`
+openclaw update
+\`\`\``,
+        analogy: "Giving OpenClaw unrestricted access to your machine is like handing a new employee the master key to every office on day one. Instead, give them a badge that opens the rooms they need, require approval for sensitive areas, and review the access logs. Trust, but verify.",
+        tip: "The single most important security step is running in Docker. It takes one config change and prevents the worst-case scenarios. If you do nothing else from this list, do that."
+      }
+    ]
+  },
   appendix: {
     title: "Appendix: Project Startup System",
     subtitle: "Professional Project Documentation",
@@ -1046,7 +1611,14 @@ const glossaryTerms = [
   { term: "Schema Markup", definition: "Structured data (JSON-LD) added to web pages that tells search engines what the content is about, enabling rich results like star ratings and FAQ dropdowns.", category: "Marketing" },
   { term: "UTM Parameters", definition: "Tags added to URLs (utm_source, utm_medium, utm_campaign) that track where traffic comes from in your analytics.", category: "Marketing" },
   { term: "Referral Program", definition: "A system where existing customers are incentivized to refer new customers, creating a viral growth loop.", category: "Marketing" },
-  { term: "MCP Integration", definition: "When a tool has a Model Context Protocol server, allowing Claude to interact with it directly through API calls without manual setup.", category: "Marketing" }
+  { term: "MCP Integration", definition: "When a tool has a Model Context Protocol server, allowing Claude to interact with it directly through API calls without manual setup.", category: "Marketing" },
+  { term: "OpenClaw", definition: "An open-source personal AI agent that runs on your own hardware, connects to messaging apps (WhatsApp, Telegram, iMessage, etc.), and autonomously executes real-world tasks 24/7.", category: "OpenClaw" },
+  { term: "ClawHub", definition: "Community marketplace for OpenClaw skills — pre-built integrations and capabilities that extend what your agent can do.", category: "OpenClaw" },
+  { term: "Ollama", definition: "Open-source tool for running AI language models locally on your machine. Used with OpenClaw to reduce or eliminate cloud API costs.", category: "OpenClaw" },
+  { term: "VPS", definition: "Virtual Private Server — a cloud-hosted computer you rent by the month. A cost-effective alternative to buying hardware for running OpenClaw 24/7.", category: "OpenClaw" },
+  { term: "Docker", definition: "Containerization tool that isolates applications from the host system. Critical for running OpenClaw securely by restricting file and network access.", category: "OpenClaw" },
+  { term: "Prompt Injection", definition: "A security attack where hidden instructions in emails, messages, or web pages trick an AI agent into performing unintended actions.", category: "OpenClaw" },
+  { term: "Model Routing", definition: "Strategy of sending simple tasks to cheap/free AI models and only using expensive models for complex reasoning — the key to keeping OpenClaw costs under $10/month.", category: "OpenClaw" }
 ];
 
 // ==================== COMPONENTS ====================

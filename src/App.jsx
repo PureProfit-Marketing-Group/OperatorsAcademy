@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
-import { BookOpen, Terminal, TrendingUp, Home } from 'lucide-react'
+import { BookOpen, Terminal, TrendingUp, Bot, Home } from 'lucide-react'
 import ClaudeCodeGuide from './ClaudeCodeGuide'
 import OperatorAcademy from './OperatorAcademy'
 
@@ -15,7 +15,7 @@ function HomePage() {
           Learn to build AI-powered systems with Claude.ai, Claude Code, and n8n
         </p>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           <Link
             to="/course"
             className="group bg-gray-800 border border-gray-700 rounded-xl p-6 hover:border-blue-500 transition-all hover:shadow-lg hover:shadow-blue-500/20"
@@ -30,7 +30,25 @@ function HomePage() {
               Complete course covering Claude.ai, Claude Code, and n8n workflow automation. Perfect for beginners.
             </p>
             <div className="mt-4 text-blue-400 flex items-center gap-2 group-hover:gap-3 transition-all">
-              Start Learning <span>→</span>
+              Start Learning <span>&rarr;</span>
+            </div>
+          </Link>
+
+          <Link
+            to="/course#module6"
+            className="group bg-gray-800 border border-gray-700 rounded-xl p-6 hover:border-orange-500 transition-all hover:shadow-lg hover:shadow-orange-500/20"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-3 bg-orange-500/20 rounded-lg">
+                <Bot className="text-orange-400" size={24} />
+              </div>
+              <h2 className="text-xl font-semibold">OpenClaw Setup Guide</h2>
+            </div>
+            <p className="text-gray-400 text-left">
+              Run a personal AI agent 24/7 for under $10/month. Skip the $600 Mac Mini — set up OpenClaw on a $4 VPS or locally.
+            </p>
+            <div className="mt-4 text-orange-400 flex items-center gap-2 group-hover:gap-3 transition-all">
+              Set Up Your Agent <span>&rarr;</span>
             </div>
           </Link>
 
@@ -48,7 +66,7 @@ function HomePage() {
               Build a complete marketing engine using 25 AI-powered skills. Covers SEO, copywriting, ads, email, and growth.
             </p>
             <div className="mt-4 text-teal-400 flex items-center gap-2 group-hover:gap-3 transition-all">
-              Start Marketing <span>→</span>
+              Start Marketing <span>&rarr;</span>
             </div>
           </Link>
 
@@ -66,7 +84,7 @@ function HomePage() {
               Deep dive into the Claude Code Project Startup System. For developers ready to master AI-assisted development.
             </p>
             <div className="mt-4 text-purple-400 flex items-center gap-2 group-hover:gap-3 transition-all">
-              Explore Guide <span>→</span>
+              Explore Guide <span>&rarr;</span>
             </div>
           </Link>
         </div>
