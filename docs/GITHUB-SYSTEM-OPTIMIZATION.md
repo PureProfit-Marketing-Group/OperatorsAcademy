@@ -18,11 +18,18 @@ This guide documents the GitHub system optimizations implemented for Enzo's deve
 A Kanban board that provides visual progress tracking across all repositories.
 
 ### Project: "Enzo's Dev Roadmap"
-- **URL:** https://github.com/users/ehoyos007/projects/[PROJECT_NUMBER]
-- **Views:**
-  - **All Tasks** — Everything in one place
-  - **FHE Repos** — First Health Enrollment projects (tagged `fhe-roadmap`)
-  - **Personal/Side Projects** — Non-FHE work
+- **URL:** https://github.com/users/ehoyos007/projects/2
+- **Views:** (create via UI)
+  - **All Tasks** — Default view, everything in one place
+  - **FHE Projects** — Filter by Category = "FHE"
+  - **Personal & Side Projects** — Filter by Category = "Personal" or "Tools"
+
+### Custom Field: "Category"
+Use this single-select field to categorize items:
+- `FHE` — First Health Enrollment projects
+- `Personal` — Side projects, experiments
+- `Client` — Client work (TrueView, Satori, etc.)
+- `Tools` — Developer tools (ClaudeCodeManager, etc.)
 
 ### FHE Repositories (tagged `fhe-roadmap`)
 | Repository | Description |
