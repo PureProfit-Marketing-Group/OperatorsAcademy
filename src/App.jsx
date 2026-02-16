@@ -1,13 +1,13 @@
 import React from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
-import { BookOpen, Terminal, Home } from 'lucide-react'
+import { BookOpen, Terminal, TrendingUp, Home } from 'lucide-react'
 import ClaudeCodeGuide from './ClaudeCodeGuide'
 import OperatorAcademy from './OperatorAcademy'
 
 function HomePage() {
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-6">
-      <div className="max-w-2xl mx-auto text-center">
+      <div className="max-w-5xl mx-auto text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
           Operators Academy
         </h1>
@@ -15,7 +15,7 @@ function HomePage() {
           Learn to build AI-powered systems with Claude.ai, Claude Code, and n8n
         </p>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
           <Link
             to="/course"
             className="group bg-gray-800 border border-gray-700 rounded-xl p-6 hover:border-blue-500 transition-all hover:shadow-lg hover:shadow-blue-500/20"
@@ -31,6 +31,24 @@ function HomePage() {
             </p>
             <div className="mt-4 text-blue-400 flex items-center gap-2 group-hover:gap-3 transition-all">
               Start Learning <span>→</span>
+            </div>
+          </Link>
+
+          <Link
+            to="/course#module5"
+            className="group bg-gray-800 border border-gray-700 rounded-xl p-6 hover:border-teal-500 transition-all hover:shadow-lg hover:shadow-teal-500/20"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-3 bg-teal-500/20 rounded-lg">
+                <TrendingUp className="text-teal-400" size={24} />
+              </div>
+              <h2 className="text-xl font-semibold">Marketing from Zero</h2>
+            </div>
+            <p className="text-gray-400 text-left">
+              Build a complete marketing engine using 25 AI-powered skills. Covers SEO, copywriting, ads, email, and growth.
+            </p>
+            <div className="mt-4 text-teal-400 flex items-center gap-2 group-hover:gap-3 transition-all">
+              Start Marketing <span>→</span>
             </div>
           </Link>
 

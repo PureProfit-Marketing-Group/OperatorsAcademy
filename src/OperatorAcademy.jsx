@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { BookOpen, Terminal, Cpu, Workflow, Link2, FileText, StickyNote, ChevronRight, ChevronLeft, Check, Circle, Lightbulb, AlertTriangle, Target, Home, List, Menu, X, Trash2, Plus, Search, TrendingUp } from 'lucide-react';
 
 // ==================== COURSE DATA ====================
@@ -1219,6 +1220,7 @@ const ProgressBar = ({ current, total }) => (
 
 // ==================== MAIN APP ====================
 export default function OperatorAcademy() {
+  const location = useLocation();
   const [currentModule, setCurrentModule] = useState('introduction');
   const [currentSection, setCurrentSection] = useState(0);
   const [completedSections, setCompletedSections] = useState({});
@@ -1228,12 +1230,12 @@ export default function OperatorAcademy() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [glossarySearch, setGlossarySearch] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  
+
   const modules = Object.keys(courseData);
   const currentModuleData = courseData[currentModule];
   const totalSections = Object.values(courseData).reduce((acc, m) => acc + m.sections.length, 0);
   const completedCount = Object.values(completedSections).filter(Boolean).length;
-  
+
   useEffect(() => {
     try {
       const savedNotes = localStorage.getItem('operator-academy-notes');
@@ -1242,7 +1244,12 @@ export default function OperatorAcademy() {
 
       if (savedNotes) setNotes(JSON.parse(savedNotes));
       if (savedProgress) setCompletedSections(JSON.parse(savedProgress));
-      if (savedPosition) {
+
+      const hash = location.hash.replace('#', '');
+      if (hash && courseData[hash]) {
+        setCurrentModule(hash);
+        setCurrentSection(0);
+      } else if (savedPosition) {
         const pos = JSON.parse(savedPosition);
         setCurrentModule(pos.module);
         setCurrentSection(pos.section);
