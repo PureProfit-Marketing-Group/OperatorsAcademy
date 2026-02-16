@@ -1,0 +1,75 @@
+name: Auto-Update PROGRESS.md
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-progress:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 50 # Get enough history for meaningful commits
+      
+      - name: Generate PROGRESS.md
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Header
+          cat > PROGRESS.md << 'EOF'
+          # Project Progress
+          
+          > Auto-generated on every push. Last updated: $(date -u '+%Y-%m-%d %H:%M UTC')
+          
+          ## Recent Activity
+          
+          ### Last 10 Commits
+          EOF
+          
+          # Recent commits
+          echo '```' >> PROGRESS.md
+          git log --oneline -10 --pretty=format:"%h %s (%cr)" >> PROGRESS.md
+          echo '' >> PROGRESS.md
+          echo '```' >> PROGRESS.md
+          
+          # Open issues (if any)
+          echo '' >> PROGRESS.md
+          echo '### Open Issues' >> PROGRESS.md
+          
+          ISSUES=$(gh issue list --state open --limit 10 --json number,title,labels 2>/dev/null || echo "[]")
+          if [ "$ISSUES" = "[]" ] || [ -z "$ISSUES" ]; then
+            echo '_No open issues_' >> PROGRESS.md
+          else
+            echo "$ISSUES" | jq -r '.[] | "- #\(.number): \(.title)"' >> PROGRESS.md
+          fi
+          
+          # Add manual sections reminder
+          cat >> PROGRESS.md << 'EOF'
+          
+          ---
+          
+          ## Current Phase
+          
+          <!-- Update this section manually or via issues -->
+          _See GitHub Issues for current task breakdown._
+          
+          ## Next Steps
+          
+          <!-- Add your next priorities here -->
+          
+          EOF
+      
+      - name: Commit and Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add PROGRESS.md
+          git diff --staged --quiet || git commit -m "📊 Auto-update PROGRESS.md"
+          git push
