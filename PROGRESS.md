@@ -76,3 +76,42 @@ Added a new course section covering the experimental Agent Teams feature in Clau
 - [ ] Add a custom domain if desired
 - [ ] Consider adding meta tags for SEO/social sharing
 - [ ] Deploy updated build to Vercel
+
+---
+
+## 2026-02-16 — Session 3
+
+### Summary
+Added Module 5: "Marketing from Zero" — a comprehensive course section teaching students how to use the Marketing Skills toolkit (25 AI agent skills from coreyhaines31/marketingskills) to build a complete marketing engine for any business using the Operator Stack.
+
+### Completed
+- [x] Explored the marketingskills GitHub repo (25 skills, 29 tool integrations, 12 programmatic SEO playbooks)
+- [x] Explored current Operators Academy codebase structure and data format
+- [x] Added Module 5 with 8 sections covering the full marketing funnel:
+  - 5.1 The Marketing Skills Toolkit (overview, installation, 25 skills by category)
+  - 5.2 Foundation: Your Marketing Context (product-marketing-context skill)
+  - 5.3 Copywriting & Landing Pages (copywriting, copy-editing, page-cro, form-cro, signup-flow-cro, onboarding-cro, popup-cro)
+  - 5.4 SEO & Organic Discovery (seo-audit, programmatic-seo, schema-markup, competitor-alternatives)
+  - 5.5 Email & Content Marketing (email-sequence, content-strategy, social-content)
+  - 5.6 Paid Acquisition & Analytics (paid-ads, analytics-tracking, ab-test-setup)
+  - 5.7 Growth Engines & Psychology (referral-program, free-tool-strategy, pricing-strategy, marketing-psychology, marketing-ideas)
+  - 5.8 The Zero-to-Launch Playbook (5-phase weekly plan, n8n automation layer, 29 tool integrations)
+- [x] Added 10 new glossary terms (A/B Test, CRO, CTA, Marketing Skills, Product Marketing Context, Programmatic SEO, Schema Markup, UTM Parameters, Referral Program, MCP Integration)
+- [x] Added TrendingUp icon import for new module
+- [x] Verified build succeeds (31 total sections across 7 modules)
+
+### Files Changed
+- `src/OperatorAcademy.jsx` — Added Module 5 (534 lines), 10 glossary terms, TrendingUp icon import
+
+### Decisions Made
+- Placed Marketing from Zero as Module 5 (after "Tying It All Together", before Appendix) since it builds on the Operator Stack foundation
+- Structured sections to follow the natural order of building marketing from scratch (foundation → copy → SEO → email → paid → growth → full playbook)
+- Included Operator Stack workflow in each section showing how Claude.ai, Claude Code, and n8n work together for that marketing task
+- Every section has an analogy and pro tip matching the existing course style
+
+### Next Steps
+- [ ] Deploy updated build to Vercel
+- [ ] Consider adding the Word doc content or removing it
+- [ ] Add a custom domain if desired
+- [ ] Consider adding meta tags for SEO/social sharing
+- [ ] Consider interactive exercises for Module 5 (e.g., "build your marketing context" worksheet)
