@@ -1,8 +1,9 @@
 import React from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
-import { BookOpen, Terminal, TrendingUp, Bot, Home } from 'lucide-react'
+import { BookOpen, Terminal, TrendingUp, Bot, Home, Download } from 'lucide-react'
 import ClaudeCodeGuide from './ClaudeCodeGuide'
 import OperatorAcademy from './OperatorAcademy'
+import InstallPage from './InstallPage'
 
 function HomePage() {
   return (
@@ -89,6 +90,28 @@ function HomePage() {
           </Link>
         </div>
 
+        <Link
+          to="/install"
+          className="group mt-6 block bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-xl p-6 hover:border-purple-500 transition-all hover:shadow-lg hover:shadow-purple-500/20"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-purple-500/20 rounded-lg">
+                <Download className="text-purple-400" size={24} />
+              </div>
+              <div>
+                <h2 className="text-xl font-semibold">Install the Workflow</h2>
+                <p className="text-gray-400 text-sm mt-1">
+                  One command to set up the full Claude Code workflow — docs, agents, status bar, and more.
+                </p>
+              </div>
+            </div>
+            <div className="text-purple-400 flex items-center gap-2 group-hover:gap-3 transition-all">
+              Install <span>&rarr;</span>
+            </div>
+          </div>
+        </Link>
+
         <p className="text-gray-600 text-sm mt-12">
           Built for developers learning AI-powered development
         </p>
@@ -103,6 +126,7 @@ export default function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/course" element={<OperatorAcademy />} />
       <Route path="/claude-code-guide" element={<ClaudeCodeGuide />} />
+      <Route path="/install" element={<InstallPage />} />
     </Routes>
   )
 }
