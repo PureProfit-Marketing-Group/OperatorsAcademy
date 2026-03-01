@@ -1951,12 +1951,12 @@ export default function OperatorAcademy() {
     <div className="min-h-screen bg-gray-900 text-white flex">
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-gray-800 rounded-lg"
+        className="lg:hidden fixed top-16 left-4 z-50 p-2 bg-gray-800 rounded-lg"
       >
         {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
       
-      <div className={`fixed lg:static inset-y-0 left-0 z-40 w-72 bg-gray-950 border-r border-gray-800 transform transition-transform duration-300 flex flex-col ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+      <div className={`fixed lg:static top-12 bottom-0 left-0 z-40 w-72 bg-gray-950 border-r border-gray-800 transform transition-transform duration-300 flex flex-col ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
         <div className="p-6 flex-1 overflow-y-auto">
           <h1 className="text-xl font-bold text-teal-400 mb-1">OPERATOR ACADEMY</h1>
           <p className="text-sm text-gray-500 mb-6">Course 1: Foundations</p>

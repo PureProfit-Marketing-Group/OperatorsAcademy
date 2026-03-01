@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Book, FileText, CheckSquare, GitBranch, Clock, Bug, TestTube, Eye, Zap, ChevronRight, ChevronDown, Copy, Check, Play, Pause, RotateCcw, FolderOpen, Terminal, MessageSquare, AlertTriangle, Lightbulb, Target, Layers, ArrowRight, Home, BookOpen, Wrench, Brain, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Book, FileText, CheckSquare, GitBranch, Clock, Bug, TestTube, Eye, Zap, ChevronRight, ChevronDown, Copy, Check, Play, Pause, RotateCcw, FolderOpen, Terminal, MessageSquare, AlertTriangle, Lightbulb, Target, Layers, ArrowRight, Home, BookOpen, Wrench, Brain, Shield, Download } from 'lucide-react';
 
 // Copy button component
 const CopyButton = ({ text }) => {
@@ -900,6 +901,29 @@ export default function ClaudeCodeGuide() {
             <ChevronRight size={16} />
           </button>
         </div>
+
+        {currentPageIndex === pages.length - 1 && (
+          <div className="mt-10 bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-xl p-8 text-center">
+            <h3 className="text-xl font-bold mb-2">You finished the guide!</h3>
+            <p className="text-gray-400 mb-6">Put it into practice — install the workflow or take the full course.</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                to="/install"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-purple-600 hover:bg-purple-500 rounded-lg font-medium transition-colors"
+              >
+                <Download size={16} />
+                Install the Workflow
+              </Link>
+              <Link
+                to="/course"
+                className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                <BookOpen size={16} />
+                Take the course
+              </Link>
+            </div>
+          </div>
+        )}
 
         <div className="text-center text-xs text-gray-600 mt-8">
           Claude Code Project Startup System Guide • Built for developers learning AI-assisted development

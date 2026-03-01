@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, Check, Terminal, Download, FolderOpen, Shield, GitBranch, Eye, Zap, Bug, TestTube, BookOpen, ArrowRight, ChevronRight, ChevronDown, Home, Server } from 'lucide-react';
+import { Copy, Check, Terminal, Download, FolderOpen, Shield, GitBranch, Eye, Zap, Bug, TestTube, BookOpen, ArrowRight, ChevronRight, ChevronDown, Home, Server, TrendingUp, Bot } from 'lucide-react';
 
 const CopyButton = ({ text, label = 'Copy' }) => {
   const [copied, setCopied] = useState(false);
@@ -41,16 +41,8 @@ const INSTALL_CMD = 'curl -fsSL https://operators-academy.vercel.app/claude-setu
 export default function InstallPage() {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      {/* Nav */}
-      <div className="max-w-4xl mx-auto px-4 pt-4">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
-          <Home size={16} />
-          Back to Home
-        </Link>
-      </div>
-
       {/* Hero */}
-      <div className="max-w-4xl mx-auto px-4 pt-12 pb-8 text-center">
+      <div className="max-w-4xl mx-auto px-4 pt-8 pb-8 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-500/20 border border-purple-500/30 rounded-full text-purple-300 text-sm mb-6">
           <Terminal size={14} />
           One command install
@@ -323,6 +315,47 @@ export default function InstallPage() {
               </ul>
             </div>
           </Expandable>
+        </div>
+      </div>
+
+      {/* Next Steps */}
+      <div className="max-w-4xl mx-auto px-4 pb-12">
+        <h2 className="text-2xl font-bold mb-6">Next steps</h2>
+        <div className="grid md:grid-cols-2 gap-4">
+          <Link
+            to="/setup/marketing"
+            className="group bg-gray-800 border border-gray-700 rounded-xl p-5 hover:border-teal-500 transition-all hover:shadow-lg hover:shadow-teal-500/10"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 bg-teal-500/20 rounded-lg">
+                <TrendingUp className="text-teal-400" size={20} />
+              </div>
+              <h3 className="font-semibold">Marketing Skills</h3>
+            </div>
+            <p className="text-sm text-gray-400 mb-3">
+              25 AI-powered marketing skills — copywriting, SEO, CRO, ads, email, and growth.
+            </p>
+            <div className="text-teal-400 text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+              Set up <ArrowRight size={14} />
+            </div>
+          </Link>
+          <Link
+            to="/setup/openclaw"
+            className="group bg-gray-800 border border-gray-700 rounded-xl p-5 hover:border-orange-500 transition-all hover:shadow-lg hover:shadow-orange-500/10"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 bg-orange-500/20 rounded-lg">
+                <Bot className="text-orange-400" size={20} />
+              </div>
+              <h3 className="font-semibold">OpenClaw Agent</h3>
+            </div>
+            <p className="text-sm text-gray-400 mb-3">
+              Run a personal AI agent 24/7 for under $10/month on a VPS or locally.
+            </p>
+            <div className="text-orange-400 text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+              Set up <ArrowRight size={14} />
+            </div>
+          </Link>
         </div>
       </div>
 

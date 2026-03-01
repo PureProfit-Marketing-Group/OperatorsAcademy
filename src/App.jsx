@@ -1,6 +1,7 @@
 import React from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import { BookOpen, Terminal, TrendingUp, Bot, Home, Download, Zap } from 'lucide-react'
+import SiteNav from './components/SiteNav'
 import ClaudeCodeGuide from './ClaudeCodeGuide'
 import OperatorAcademy from './OperatorAcademy'
 import InstallPage from './InstallPage'
@@ -143,14 +144,17 @@ function HomePage() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/course" element={<OperatorAcademy />} />
-      <Route path="/claude-code-guide" element={<ClaudeCodeGuide />} />
-      <Route path="/install" element={<InstallPage />} />
-      <Route path="/setup/marketing" element={<MarketingSetupPage />} />
-      <Route path="/setup/openclaw" element={<OpenClawSetupPage />} />
-      <Route path="/prompt-flows" element={<PromptFlowsPage />} />
-    </Routes>
+    <>
+      <SiteNav />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/course" element={<OperatorAcademy />} />
+        <Route path="/claude-code-guide" element={<ClaudeCodeGuide />} />
+        <Route path="/install" element={<InstallPage />} />
+        <Route path="/setup/marketing" element={<MarketingSetupPage />} />
+        <Route path="/setup/openclaw" element={<OpenClawSetupPage />} />
+        <Route path="/prompt-flows" element={<PromptFlowsPage />} />
+      </Routes>
+    </>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, Check, Terminal, ChevronRight, ChevronDown, Home, ArrowRight, TrendingUp, Zap, BookOpen, Package } from 'lucide-react';
+import { Copy, Check, Terminal, ChevronRight, ChevronDown, Home, ArrowRight, TrendingUp, Zap, BookOpen, Package, Bot } from 'lucide-react';
 
 const CopyButton = ({ text, label = 'Copy' }) => {
   const [copied, setCopied] = useState(false);
@@ -66,16 +66,8 @@ export default function MarketingSetupPage() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      {/* Nav */}
-      <div className="max-w-4xl mx-auto px-4 pt-4">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
-          <Home size={16} />
-          Back to Home
-        </Link>
-      </div>
-
       {/* Hero */}
-      <div className="max-w-4xl mx-auto px-4 pt-12 pb-8 text-center">
+      <div className="max-w-4xl mx-auto px-4 pt-8 pb-8 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-teal-500/20 border border-teal-500/30 rounded-full text-teal-300 text-sm mb-6">
           <TrendingUp size={14} />
           25 AI-powered marketing skills
@@ -294,6 +286,11 @@ export default function MarketingSetupPage() {
             <Link to="/install" className="flex items-center gap-1 hover:text-purple-300 transition-colors">
               <ArrowRight size={14} />
               Install workflow
+            </Link>
+            <span className="text-gray-600">|</span>
+            <Link to="/setup/openclaw" className="flex items-center gap-1 hover:text-orange-300 transition-colors">
+              <Bot size={14} />
+              Set up OpenClaw
             </Link>
           </div>
         </div>
