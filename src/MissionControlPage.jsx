@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, Check, Terminal, Monitor, GitBranch, Activity, AlertTriangle, Cloud, Database, Keyboard, ChevronRight, ChevronDown, ArrowRight, BookOpen, Download, Settings, Cpu } from 'lucide-react';
+import { Copy, Check, Monitor, GitBranch, ArrowRight, BookOpen, Download, Globe, MessageSquare, Search, Upload, Calendar, Eye, Server, ListTodo, Activity, ChevronRight, ChevronDown } from 'lucide-react';
 
 const CopyButton = ({ text, label = 'Copy' }) => {
   const [copied, setCopied] = useState(false);
@@ -38,46 +38,61 @@ const Expandable = ({ title, children, defaultOpen = false }) => {
 
 const INSTALL_CMD = 'curl -fsSL https://operators-academy.vercel.app/claude-setup/install-mission-control.sh | bash';
 
-const panels = [
+const features = [
   {
-    name: 'Claude Sessions',
-    icon: Cpu,
+    name: 'Chat Log Viewer',
+    icon: MessageSquare,
     color: 'cyan',
-    desc: 'Active sessions with state detection (RUNNING, AWAITING INPUT, IDLE), context window usage, branch info, and uncommitted changes.',
+    desc: 'Browse and review past Claude Code conversations. Search across sessions, filter by project, and revisit any exchange.',
   },
   {
-    name: 'Git Status',
-    icon: GitBranch,
+    name: 'Session Management',
+    icon: Activity,
     color: 'purple',
-    desc: 'Branch, uncommitted file count, ahead/behind tracking, and last commit time per project.',
+    desc: 'Start new Claude Code sessions or resume previous ones directly from the browser. No terminal switching required.',
   },
   {
-    name: 'Vercel Deployments',
-    icon: Cloud,
-    color: 'white',
-    desc: 'Deployment status (LIVE/BUILDING/FAILED), build duration, function count, and commit messages.',
+    name: 'Conversation Search',
+    icon: Search,
+    color: 'blue',
+    desc: 'Full-text search across all your Claude Code conversations. Find that one prompt or solution from last week instantly.',
   },
   {
-    name: 'Supabase Health',
-    icon: Database,
+    name: 'File Upload',
+    icon: Upload,
     color: 'emerald',
-    desc: 'Database size, connection count, cache hit rates, and a built-in migration runner.',
+    desc: 'Upload files directly through the web interface to share context with Claude Code sessions.',
   },
   {
-    name: 'Sentry Alerts',
-    icon: AlertTriangle,
+    name: 'Browser Preview',
+    icon: Eye,
     color: 'orange',
-    desc: 'Unresolved error tracking with severity breakdown (fatal/error/warning).',
+    desc: 'Preview web apps and rendered output right inside the dashboard without switching windows.',
+  },
+  {
+    name: 'Git Integration',
+    icon: GitBranch,
+    color: 'pink',
+    desc: 'See branch status, recent commits, and diffs associated with each session at a glance.',
+  },
+  {
+    name: 'MCP Viewer',
+    icon: Server,
+    color: 'yellow',
+    desc: 'Inspect active MCP server connections and available tools for each session.',
+  },
+  {
+    name: 'Message Scheduler',
+    icon: Calendar,
+    color: 'indigo',
+    desc: 'Queue up prompts to send to Claude Code sessions on a schedule or when conditions are met.',
   },
 ];
 
-const shortcuts = [
-  { keys: 'j / k', action: 'Scroll within panel' },
-  { keys: 'Tab', action: 'Next panel' },
-  { keys: '1-5', action: 'Jump to panel' },
-  { keys: 'r', action: 'Force refresh' },
-  { keys: 'm', action: 'Run migration' },
-  { keys: 'q', action: 'Quit' },
+const roadmapItems = [
+  { label: 'Task queue', desc: 'Queue and prioritize tasks across multiple sessions' },
+  { label: 'Clu session management', desc: 'Manage persistent Clu agent sessions from the dashboard' },
+  { label: 'Activity & PR tracking', desc: 'Track code changes, pull requests, and deployment status per session' },
 ];
 
 export default function MissionControlPage() {
@@ -86,15 +101,15 @@ export default function MissionControlPage() {
       {/* Hero */}
       <div className="max-w-4xl mx-auto px-4 pt-8 pb-8 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-full text-cyan-300 text-sm mb-6">
-          <Monitor size={14} />
-          Terminal Dashboard
+          <Globe size={14} />
+          Web Dashboard
         </div>
         <h1 className="text-3xl md:text-4xl font-bold mb-4">
-          Mission Control
+          Clu Mission Control
         </h1>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-          A real-time terminal dashboard for managing multiple Claude Code sessions.
-          See every session, repo, deployment, and alert in one persistent pane.
+          A web-based Claude Code client. Browse chat logs, start and resume sessions,
+          search conversations, upload files, and manage everything from your browser.
         </p>
       </div>
 
@@ -102,46 +117,40 @@ export default function MissionControlPage() {
       <div className="max-w-4xl mx-auto px-4 pb-8">
         <div className="bg-gray-950 border border-gray-700 rounded-xl p-4 font-mono text-xs overflow-x-auto">
           <div className="text-gray-500 mb-2">
-            {'  '}MISSION CONTROL{' '}
-            <span className="text-gray-700">{'─'.repeat(40)}</span>
-            <span className="text-gray-600 float-right">14:32:08</span>
+            {'  '}CLU MISSION CONTROL{' '}
+            <span className="text-gray-700">{'─'.repeat(36)}</span>
+            <span className="text-gray-600 float-right">localhost:5173</span>
           </div>
           <div className="mb-3">
             <div className="text-cyan-400 mb-1">{'  '}SESSIONS</div>
             <div className="text-gray-300">
-              {'  '}<span className="text-green-400">RUNNING</span>{'    '}sales-coaching-ai{'   '}<span className="text-green-400">{'████████░░'} 78%</span>{'  '}main{'        '}2 dirty
+              {'  '}<span className="text-green-400">ACTIVE</span>{'    '}sales-coaching-ai{'   '}<span className="text-gray-500">main</span>{'        '}12 messages{'  '}<span className="text-green-400">connected</span>
             </div>
             <div className="text-gray-300">
-              {'  '}<span className="text-yellow-400">AWAITING</span>{'   '}lead-crm{'            '}<span className="text-cyan-400">{'██████░░░░'} 55%</span>{'  '}feat/auth{'   '}clean
+              {'  '}<span className="text-yellow-400">PAUSED</span>{'    '}lead-crm{'            '}<span className="text-gray-500">feat/auth</span>{'   '}8 messages{'   '}<span className="text-yellow-400">resumable</span>
             </div>
             <div className="text-gray-300">
-              {'  '}<span className="text-gray-500">IDLE</span>{'       '}operators-academy{'   '}<span className="text-gray-500">{'███░░░░░░░'} 28%</span>{'  '}main{'        '}clean
+              {'  '}<span className="text-gray-500">SAVED</span>{'     '}operators-academy{'   '}<span className="text-gray-500">main</span>{'        '}42 messages{'  '}<span className="text-gray-500">archived</span>
             </div>
           </div>
           <div className="mb-3">
-            <div className="text-purple-400 mb-1">{'  '}GIT</div>
+            <div className="text-purple-400 mb-1">{'  '}SEARCH</div>
             <div className="text-gray-300">
-              {'  '}sales-coaching-ai{'   '}main{'         '}<span className="text-yellow-400">2 uncommitted</span>{'  '}3m ago
-            </div>
-            <div className="text-gray-300">
-              {'  '}lead-crm{'            '}feat/auth{'    '}<span className="text-green-400">clean</span>{'            '}12m ago
+              {'  '}<span className="text-gray-500">&gt;</span> "how to implement OAuth"{'   '}<span className="text-cyan-400">3 results across 2 sessions</span>
             </div>
           </div>
           <div>
-            <div className="text-gray-400 mb-1">{'  '}DEPLOYMENTS</div>
+            <div className="text-emerald-400 mb-1">{'  '}MCP TOOLS</div>
             <div className="text-gray-300">
-              {'  '}sales-coaching-ai{'   '}<span className="text-green-400">LIVE</span>{'     '}42s{'  '}main{'  '}"Add checkout flow"
-            </div>
-            <div className="text-gray-300">
-              {'  '}lead-crm{'            '}<span className="text-yellow-400">BUILDING</span>{' '}...{'  '}feat/auth{'  '}"OAuth provider"
+              {'  '}filesystem{'  '}github{'  '}supabase{'  '}<span className="text-gray-500">3 servers connected</span>
             </div>
           </div>
           <div className="mt-3 text-gray-600 border-t border-gray-800 pt-2">
-            {'  '}3 sessions{'  '}|{'  '}2 repos synced{'  '}|{'  '}1 LIVE{'  '}|{'  '}DB OK{'  '}|{'  '}0 alerts
+            {'  '}3 sessions{'  '}|{'  '}63 conversations{'  '}|{'  '}3 MCP servers{'  '}|{'  '}git synced
           </div>
         </div>
         <p className="text-xs text-gray-600 mt-2 text-center">
-          Simulated output — actual dashboard updates in real-time
+          Simulated output — actual dashboard runs at localhost:5173
         </p>
       </div>
 
@@ -160,26 +169,23 @@ export default function MissionControlPage() {
             <span className="text-green-400">bash</span>
           </div>
           <p className="text-xs text-gray-500 mt-3">
-            Requires Go 1.21+ and git. Installs to ~/.local/bin/mc.
+            Requires Node.js 18+, pnpm, and git. Installs to ~/.local/share/clu-mission-control.
           </p>
         </div>
       </div>
 
-      {/* 5 Panels */}
+      {/* Features */}
       <div className="max-w-4xl mx-auto px-4 pb-12">
-        <h2 className="text-2xl font-bold mb-6">Five live panels</h2>
-        <div className="space-y-3">
-          {panels.map((p, i) => (
-            <div key={p.name} className="bg-gray-800 border border-gray-700 rounded-xl p-5 flex items-start gap-4">
-              <div className={`p-2.5 bg-${p.color === 'white' ? 'gray' : p.color}-500/20 rounded-lg flex-shrink-0`}>
-                <p.icon className={`text-${p.color === 'white' ? 'gray' : p.color}-400`} size={20} />
+        <h2 className="text-2xl font-bold mb-6">Features</h2>
+        <div className="grid md:grid-cols-2 gap-3">
+          {features.map((f) => (
+            <div key={f.name} className="bg-gray-800 border border-gray-700 rounded-xl p-5 flex items-start gap-4">
+              <div className={`p-2.5 bg-${f.color}-500/20 rounded-lg flex-shrink-0`}>
+                <f.icon className={`text-${f.color}-400`} size={20} />
               </div>
               <div>
-                <div className="flex items-center gap-3 mb-1">
-                  <h3 className="font-semibold">{p.name}</h3>
-                  <span className="text-xs text-gray-600 bg-gray-900 px-2 py-0.5 rounded">Tab {i + 1}</span>
-                </div>
-                <p className="text-sm text-gray-400">{p.desc}</p>
+                <h3 className="font-semibold mb-1">{f.name}</h3>
+                <p className="text-sm text-gray-400">{f.desc}</p>
               </div>
             </div>
           ))}
@@ -195,10 +201,10 @@ export default function MissionControlPage() {
               <span className="text-cyan-400 text-sm font-bold">1</span>
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Session-driven architecture</h3>
+              <h3 className="font-semibold mb-1">Clone and install</h3>
               <p className="text-sm text-gray-400">
-                Mission Control detects active Claude Code processes automatically.
-                Every panel filters to show only projects with active sessions — open a session and it appears, close it and it clears.
+                The installer clones the repo and runs <code className="text-cyan-300">pnpm install</code> to set up all dependencies.
+                No build step required — it's a Vite dev server.
               </p>
             </div>
           </div>
@@ -208,11 +214,10 @@ export default function MissionControlPage() {
               <span className="text-cyan-400 text-sm font-bold">2</span>
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Real-time process detection</h3>
+              <h3 className="font-semibold mb-1">Start the dev server</h3>
               <p className="text-sm text-gray-400">
-                Detects session state by inspecting process trees.
-                A foreground <code className="text-cyan-300">caffeinate</code> child means Claude is thinking (RUNNING).
-                No child process means it's waiting for input (AWAITING INPUT). Background sessions show as IDLE.
+                Run <code className="text-cyan-300">pnpm dev</code> to launch the dashboard at <code className="text-cyan-300">localhost:5173</code>.
+                The web client connects to your local Claude Code instance automatically.
               </p>
             </div>
           </div>
@@ -222,10 +227,10 @@ export default function MissionControlPage() {
               <span className="text-cyan-400 text-sm font-bold">3</span>
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Async refresh loops</h3>
+              <h3 className="font-semibold mb-1">Browse and manage sessions</h3>
               <p className="text-sm text-gray-400">
-                Each data source refreshes on its own interval — sessions every 5s, git every 15s, deployments every 15s, infrastructure every 60s.
-                Stale data is flagged automatically. CPU usage stays under 2%.
+                View all your Claude Code chat logs, search across conversations, start new sessions, or resume
+                existing ones — all from your browser. Upload files, preview output, and inspect MCP connections.
               </p>
             </div>
           </div>
@@ -235,76 +240,31 @@ export default function MissionControlPage() {
               <span className="text-cyan-400 text-sm font-bold">4</span>
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Graceful degradation</h3>
+              <h3 className="font-semibold mb-1">Keep it running</h3>
               <p className="text-sm text-gray-400">
-                Missing API tokens? Panel shows last-known data with a staleness indicator instead of crashing.
-                No Supabase CLI? Infrastructure panel displays an error status and keeps running. Every panel is independent.
+                Leave the dashboard open in a browser tab while you work. It stays synced with your sessions
+                in real-time. Update anytime with <code className="text-cyan-300">git pull && pnpm install</code>.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Keyboard Shortcuts */}
+      {/* Roadmap */}
       <div className="max-w-4xl mx-auto px-4 pb-12">
-        <h2 className="text-2xl font-bold mb-6">Keyboard shortcuts</h2>
-        <div className="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden">
-          {shortcuts.map((s, i) => (
-            <div
-              key={s.keys}
-              className={`flex items-center justify-between px-5 py-3 ${i < shortcuts.length - 1 ? 'border-b border-gray-700' : ''}`}
-            >
-              <kbd className="font-mono text-sm text-cyan-300 bg-gray-900 px-2.5 py-1 rounded min-w-[60px] text-center">{s.keys}</kbd>
-              <span className="text-sm text-gray-400">{s.action}</span>
+        <h2 className="text-2xl font-bold mb-6">Roadmap</h2>
+        <div className="space-y-3">
+          {roadmapItems.map((item) => (
+            <div key={item.label} className="bg-gray-800 border border-gray-700 rounded-xl p-5 flex items-start gap-4">
+              <div className="p-2.5 bg-gray-700/50 rounded-lg flex-shrink-0">
+                <ListTodo className="text-gray-400" size={20} />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1">{item.label}</h3>
+                <p className="text-sm text-gray-400">{item.desc}</p>
+              </div>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* Configuration */}
-      <div className="max-w-4xl mx-auto px-4 pb-12">
-        <h2 className="text-2xl font-bold mb-6">Configuration</h2>
-
-        <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 mb-4">
-          <div className="flex items-center gap-3 mb-4">
-            <Settings className="text-gray-400" size={18} />
-            <h3 className="font-semibold">projects.yaml</h3>
-            <span className="text-xs text-gray-600">~/.config/mission-control/projects.yaml</span>
-          </div>
-          <div className="bg-gray-950 rounded-lg p-4 font-mono text-sm overflow-x-auto">
-            <div className="text-gray-500"># Only name and path are required.</div>
-            <div className="text-gray-500"># Other fields enable additional panels.</div>
-            <div className="text-gray-300 mt-2">projects:</div>
-            <div className="text-gray-300">{'  '}- name: <span className="text-cyan-300">my-project</span></div>
-            <div className="text-gray-300">{'    '}path: <span className="text-cyan-300">~/Projects/my-project</span></div>
-            <div className="text-gray-500">{'    '}vercel_project_id: prj_xxxxx          # Optional</div>
-            <div className="text-gray-500">{'    '}supabase_project_ref: abcdef          # Optional</div>
-            <div className="text-gray-500">{'    '}sentry_project_slug: my-project       # Optional</div>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-3">
-          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
-            <h4 className="text-sm font-semibold mb-2 text-gray-300">Vercel</h4>
-            <p className="text-xs text-gray-500 mb-2">Set <code className="text-gray-400">VERCEL_TOKEN</code> env var for the Deployments panel.</p>
-            <div className="bg-gray-950 rounded p-2 font-mono text-xs text-gray-400">
-              export VERCEL_TOKEN="..."
-            </div>
-          </div>
-          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
-            <h4 className="text-sm font-semibold mb-2 text-gray-300">Sentry</h4>
-            <p className="text-xs text-gray-500 mb-2">Set both <code className="text-gray-400">SENTRY_AUTH_TOKEN</code> and <code className="text-gray-400">SENTRY_ORG</code>.</p>
-            <div className="bg-gray-950 rounded p-2 font-mono text-xs text-gray-400">
-              export SENTRY_AUTH_TOKEN="..."
-            </div>
-          </div>
-          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
-            <h4 className="text-sm font-semibold mb-2 text-gray-300">Supabase</h4>
-            <p className="text-xs text-gray-500 mb-2">Needs <code className="text-gray-400">supabase</code> CLI installed and linked in project dirs.</p>
-            <div className="bg-gray-950 rounded p-2 font-mono text-xs text-gray-400">
-              brew install supabase/tap/supabase
-            </div>
-          </div>
         </div>
       </div>
 
@@ -315,11 +275,11 @@ export default function MissionControlPage() {
         <div className="space-y-3">
           <Expandable title="What does the installer do?">
             <div className="text-sm text-gray-400 space-y-2">
-              <p>The installer clones the repository, builds the Go binary, and sets up your config:</p>
+              <p>The installer clones the repository and installs dependencies:</p>
               <ul className="list-disc list-inside space-y-1 pl-2">
-                <li><code className="text-gray-300">~/.local/bin/mc</code> — The binary (added to PATH)</li>
-                <li><code className="text-gray-300">~/.local/share/mission-control/</code> — Source code (for updates)</li>
-                <li><code className="text-gray-300">~/.config/mission-control/projects.yaml</code> — Config template</li>
+                <li><code className="text-gray-300">~/.local/share/clu-mission-control/</code> — Source code</li>
+                <li>Runs <code className="text-gray-300">pnpm install</code> to set up dependencies</li>
+                <li>Creates an alias for quick launching</li>
               </ul>
             </div>
           </Expandable>
@@ -327,15 +287,10 @@ export default function MissionControlPage() {
           <Expandable title="What are the prerequisites?">
             <div className="text-sm text-gray-400 space-y-2">
               <ul className="list-disc list-inside space-y-1 pl-2">
-                <li><strong className="text-gray-200">Go 1.21+</strong> — for building (<code className="text-gray-300">brew install go</code> on macOS)</li>
+                <li><strong className="text-gray-200">Node.js 18+</strong> — runtime (<code className="text-gray-300">brew install node</code> on macOS)</li>
+                <li><strong className="text-gray-200">pnpm</strong> — package manager (<code className="text-gray-300">npm install -g pnpm</code>)</li>
                 <li><strong className="text-gray-200">git</strong> — for cloning the repository</li>
-                <li><strong className="text-gray-200">Claude Code</strong> — sessions are detected automatically</li>
-              </ul>
-              <p className="mt-2">Optional for extra panels:</p>
-              <ul className="list-disc list-inside space-y-1 pl-2">
-                <li><code className="text-gray-300">VERCEL_TOKEN</code> — Deployments panel</li>
-                <li><code className="text-gray-300">SENTRY_AUTH_TOKEN</code> + <code className="text-gray-300">SENTRY_ORG</code> — Alerts panel</li>
-                <li><code className="text-gray-300">supabase</code> CLI — Infrastructure panel</li>
+                <li><strong className="text-gray-200">Claude Code</strong> — the CLI tool this dashboard manages</li>
               </ul>
             </div>
           </Expandable>
@@ -348,8 +303,8 @@ export default function MissionControlPage() {
               </div>
               <p>Or update manually:</p>
               <div className="bg-gray-950 rounded-lg p-3 font-mono text-xs">
-                <div>cd ~/.local/share/mission-control</div>
-                <div>git pull && make build && cp bin/mc ~/.local/bin/mc</div>
+                <div>cd ~/.local/share/clu-mission-control</div>
+                <div>git pull && pnpm install</div>
               </div>
             </div>
           </Expandable>
@@ -357,17 +312,16 @@ export default function MissionControlPage() {
           <Expandable title="How do I uninstall?">
             <div className="text-sm text-gray-400 space-y-2">
               <div className="bg-gray-950 rounded-lg p-3 font-mono text-xs">
-                <div>rm ~/.local/bin/mc</div>
-                <div>rm -rf ~/.local/share/mission-control</div>
-                <div>rm -rf ~/.config/mission-control</div>
+                <div>rm -rf ~/.local/share/clu-mission-control</div>
               </div>
             </div>
           </Expandable>
 
-          <Expandable title="Does it work with worktrees?">
+          <Expandable title="Is this the same as the TUI terminal dashboard?">
             <div className="text-sm text-gray-400 space-y-2">
-              <p>Yes. Mission Control uses a dual-key lookup (project name + path) to match sessions to projects.
-                 If Claude Code opens a worktree under a registered project path, it maps correctly to the parent project.</p>
+              <p>No. Clu Mission Control is a <strong className="text-gray-200">web-based</strong> dashboard that runs in your browser.
+                 We're separately developing a <Link to="/session-monitor" className="text-cyan-400 hover:text-cyan-300">TUI Session Monitor</Link> for
+                 terminal-based monitoring — check that page for details.</p>
             </div>
           </Expandable>
         </div>
@@ -377,6 +331,23 @@ export default function MissionControlPage() {
       <div className="max-w-4xl mx-auto px-4 pb-12">
         <h2 className="text-2xl font-bold mb-6">Next steps</h2>
         <div className="grid md:grid-cols-2 gap-4">
+          <Link
+            to="/session-monitor"
+            className="group bg-gray-800 border border-gray-700 rounded-xl p-5 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/10"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 bg-cyan-500/20 rounded-lg">
+                <Monitor className="text-cyan-400" size={20} />
+              </div>
+              <h3 className="font-semibold">Session Monitor (TUI)</h3>
+            </div>
+            <p className="text-sm text-gray-400 mb-3">
+              Terminal-based dashboard for monitoring sessions, git, deployments, and alerts. Coming soon.
+            </p>
+            <div className="text-cyan-400 text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+              Learn more <ArrowRight size={14} />
+            </div>
+          </Link>
           <Link
             to="/install"
             className="group bg-gray-800 border border-gray-700 rounded-xl p-5 hover:border-purple-500 transition-all hover:shadow-lg hover:shadow-purple-500/10"
@@ -392,23 +363,6 @@ export default function MissionControlPage() {
             </p>
             <div className="text-purple-400 text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
               Install <ArrowRight size={14} />
-            </div>
-          </Link>
-          <Link
-            to="/claude-code-guide"
-            className="group bg-gray-800 border border-gray-700 rounded-xl p-5 hover:border-purple-500 transition-all hover:shadow-lg hover:shadow-purple-500/10"
-          >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-purple-500/20 rounded-lg">
-                <BookOpen className="text-purple-400" size={20} />
-              </div>
-              <h3 className="font-semibold">Claude Code Guide</h3>
-            </div>
-            <p className="text-sm text-gray-400 mb-3">
-              Deep dive into the Claude Code project startup system and documentation-driven development.
-            </p>
-            <div className="text-purple-400 text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
-              Read guide <ArrowRight size={14} />
             </div>
           </Link>
         </div>

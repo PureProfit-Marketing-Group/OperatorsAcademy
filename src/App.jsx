@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
-import { BookOpen, Terminal, TrendingUp, Bot, Home, Download, Zap, Monitor } from 'lucide-react'
+import { BookOpen, Terminal, TrendingUp, Bot, Home, Download, Zap, Monitor, Globe } from 'lucide-react'
 import SiteNav from './components/SiteNav'
 import ClaudeCodeGuide from './ClaudeCodeGuide'
 import OperatorAcademy from './OperatorAcademy'
@@ -9,6 +9,7 @@ import MarketingSetupPage from './MarketingSetupPage'
 import OpenClawSetupPage from './OpenClawSetupPage'
 import PromptFlowsPage from './PromptFlowsPage'
 import MissionControlPage from './MissionControlPage'
+import SessionMonitorPage from './SessionMonitorPage'
 
 function HomePage() {
   return (
@@ -118,15 +119,34 @@ function HomePage() {
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="p-3 bg-cyan-500/20 rounded-lg">
-                <Monitor className="text-cyan-400" size={24} />
+                <Globe className="text-cyan-400" size={24} />
               </div>
-              <h2 className="text-xl font-semibold">Mission Control</h2>
+              <h2 className="text-xl font-semibold">Clu Mission Control</h2>
             </div>
             <p className="text-gray-400 text-left">
-              Real-time terminal dashboard for managing multiple Claude Code sessions, git repos, deployments, and alerts.
+              Web-based Claude Code client. Browse chat logs, start sessions, search conversations, and manage everything from your browser.
             </p>
             <div className="mt-4 text-cyan-400 flex items-center gap-2 group-hover:gap-3 transition-all">
               Get Dashboard <span>&rarr;</span>
+            </div>
+          </Link>
+
+          <Link
+            to="/session-monitor"
+            className="group bg-gray-800 border border-gray-700 rounded-xl p-6 hover:border-yellow-500 transition-all hover:shadow-lg hover:shadow-yellow-500/20"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-3 bg-yellow-500/20 rounded-lg">
+                <Monitor className="text-yellow-400" size={24} />
+              </div>
+              <h2 className="text-xl font-semibold">Session Monitor</h2>
+              <span className="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-0.5 rounded-full">Soon</span>
+            </div>
+            <p className="text-gray-400 text-left">
+              TUI terminal dashboard for monitoring Claude Code sessions, git repos, deployments, and alerts in real-time.
+            </p>
+            <div className="mt-4 text-yellow-400 flex items-center gap-2 group-hover:gap-3 transition-all">
+              Learn More <span>&rarr;</span>
             </div>
           </Link>
         </div>
@@ -174,6 +194,7 @@ export default function App() {
         <Route path="/setup/openclaw" element={<OpenClawSetupPage />} />
         <Route path="/prompt-flows" element={<PromptFlowsPage />} />
         <Route path="/mission-control" element={<MissionControlPage />} />
+        <Route path="/session-monitor" element={<SessionMonitorPage />} />
       </Routes>
     </>
   )
