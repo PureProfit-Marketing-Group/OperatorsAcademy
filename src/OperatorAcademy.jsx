@@ -1,6 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { BookOpen, Terminal, Cpu, Workflow, Link2, FileText, StickyNote, ChevronRight, ChevronLeft, Check, Circle, Lightbulb, AlertTriangle, Target, Home, List, Menu, X, Trash2, Plus, Search, TrendingUp, Bot } from 'lucide-react';
+import { useLocation, Link } from 'react-router-dom';
+import { BookOpen, Terminal, Cpu, Workflow, Link2, FileText, StickyNote, ChevronRight, ChevronLeft, Check, Circle, Lightbulb, AlertTriangle, Target, Home, List, Menu, X, Trash2, Plus, Search, TrendingUp, Bot, ArrowRight } from 'lucide-react';
+
+// ==================== INSTALL BANNER ====================
+const installBannerColors = {
+  purple: { bg: 'from-purple-900/30 to-blue-900/30', border: 'border-purple-500/30', text: 'text-purple-300', hover: 'hover:text-purple-200', label: 'bg-purple-500/20 text-purple-300' },
+  teal: { bg: 'from-teal-900/30 to-cyan-900/30', border: 'border-teal-500/30', text: 'text-teal-300', hover: 'hover:text-teal-200', label: 'bg-teal-500/20 text-teal-300' },
+  orange: { bg: 'from-orange-900/30 to-amber-900/30', border: 'border-orange-500/30', text: 'text-orange-300', hover: 'hover:text-orange-200', label: 'bg-orange-500/20 text-orange-300' },
+};
+
+const InstallBanner = ({ banner }) => {
+  if (!banner) return null;
+  const c = installBannerColors[banner.color] || installBannerColors.purple;
+  return (
+    <Link
+      to={banner.link}
+      className={`mt-6 block bg-gradient-to-r ${c.bg} border ${c.border} rounded-xl p-4 transition-all hover:shadow-lg group`}
+    >
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${c.label}`}>{banner.labelText || 'Setup'}</span>
+          <span className={`text-sm font-medium ${c.text}`}>{banner.text}</span>
+        </div>
+        <ArrowRight size={16} className={`${c.text} group-hover:translate-x-1 transition-transform`} />
+      </div>
+    </Link>
+  );
+};
 
 // ==================== COURSE DATA ====================
 const courseData = {
@@ -178,7 +204,8 @@ Run Claude Code and it will prompt you to log in:
 claude
 \`\`\`
 
-This will open a browser window where you can authenticate with your Claude account.`
+This will open a browser window where you can authenticate with your Claude account.`,
+        installBanner: { color: 'purple', link: '/install', text: 'Install the Workflow', labelText: 'Quick Start' }
       },
       {
         title: "2.4 The Claude Code Interface",
@@ -455,7 +482,8 @@ git clone https://github.com/coreyhaines31/marketingskills.git
 cp -r marketingskills/skills/* .claude/skills/
 \`\`\``,
         analogy: "Think of Marketing Skills like hiring a marketing team, except each 'team member' is a specialized AI skill. You have a copywriter, an SEO expert, a CRO analyst, a paid ads manager, and a growth engineer — all available instantly, working together through Claude Code.",
-        tip: "Start by installing the full toolkit, then focus on the skills relevant to your current stage. Pre-launch businesses should prioritize copywriting, page-cro, and content-strategy. Post-launch, shift focus to analytics-tracking, ab-test-setup, and paid-ads."
+        tip: "Start by installing the full toolkit, then focus on the skills relevant to your current stage. Pre-launch businesses should prioritize copywriting, page-cro, and content-strategy. Post-launch, shift focus to analytics-tracking, ab-test-setup, and paid-ads.",
+        installBanner: { color: 'teal', link: '/setup/marketing', text: 'Marketing Skills Setup Guide', labelText: 'Setup' }
       },
       {
         title: "5.2 Foundation: Your Marketing Context",
@@ -936,7 +964,8 @@ The Marketing Skills toolkit includes guides for 29 tools you can connect:
 
 This isn't theory — it's a repeatable system. Every business can follow this playbook, adapt the skills to their market, and build a marketing engine that runs on AI-powered automation.`,
         analogy: "Building marketing from zero without a system is like trying to assemble IKEA furniture without instructions — you have all the pieces but no idea what order to put them in. This playbook is your instruction manual, and the Marketing Skills are the numbered pieces.",
-        tip: "Don't try to do everything at once. Complete each phase fully before moving to the next. A mediocre website with great ads will waste money. A great website with no traffic will waste time. Follow the order — foundation first, then traffic, then optimization."
+        tip: "Don't try to do everything at once. Complete each phase fully before moving to the next. A mediocre website with great ads will waste money. A great website with no traffic will waste time. Follow the order — foundation first, then traffic, then optimization.",
+        installBanner: { color: 'teal', link: '/setup/marketing', text: 'Install Marketing Skills', labelText: 'Install' }
       }
     ]
   },
@@ -1063,7 +1092,8 @@ Is privacy your top concern?
 • **Yes** → Path B with local Ollama models (zero cloud dependency)
 • **Not critical** → Path A is simpler and cheaper`,
         analogy: "Choosing your setup path is like choosing where to live. A VPS is renting an apartment — cheap, fast move-in, someone else handles maintenance. A Mac Mini is buying a house — more upfront cost, but it's yours, and you can do whatever you want with it.",
-        tip: "Start with Path A (VPS) even if you plan to go local later. It takes 20 minutes, costs $4/month, and teaches you how OpenClaw works before you invest in hardware. Think of it as a test drive."
+        tip: "Start with Path A (VPS) even if you plan to go local later. It takes 20 minutes, costs $4/month, and teaches you how OpenClaw works before you invest in hardware. Think of it as a test drive.",
+        installBanner: { color: 'orange', link: '/setup/openclaw', text: 'OpenClaw Setup Guide', labelText: 'Setup' }
       },
       {
         title: "6.4 Remote Setup: Your AI Agent for $4/Month",
@@ -1141,7 +1171,8 @@ You should see: \`Status: Running | Uptime: Xs | Model: claude-haiku\`
 **What you've built so far:**
 Your AI agent is live on a server, running 24/7, waiting for instructions. Next, we'll connect it to your messaging apps so you can talk to it from your phone.`,
         analogy: "Setting up a VPS for OpenClaw is like renting a tiny office for your new employee. You don't need a corner office with a view — you need a desk, a chair, and a power outlet. A $4/month server is that desk.",
-        tip: "Set a billing alert on your VPS provider for $10/month. This catches any unexpected charges early. Hetzner and most providers let you set this up in the billing dashboard."
+        tip: "Set a billing alert on your VPS provider for $10/month. This catches any unexpected charges early. Hetzner and most providers let you set this up in the billing dashboard.",
+        installBanner: { color: 'orange', link: '/setup/openclaw', text: 'Open the Quick-Start Guide', labelText: 'Quick Start' }
       },
       {
         title: "6.5 Local Setup: Mac Mini Configuration",
@@ -2023,11 +2054,12 @@ export default function OperatorAcademy() {
                 <h3 className="text-lg lg:text-xl font-semibold mb-4">
                   {currentModuleData.sections[currentSection].title}
                 </h3>
-                <ContentRenderer 
+                <ContentRenderer
                   content={currentModuleData.sections[currentSection].content}
                   analogy={currentModuleData.sections[currentSection].analogy}
                   tip={currentModuleData.sections[currentSection].tip}
                 />
+                <InstallBanner banner={currentModuleData.sections[currentSection].installBanner} />
               </div>
               
               <div className="flex items-center justify-between gap-4">

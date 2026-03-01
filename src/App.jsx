@@ -4,6 +4,8 @@ import { BookOpen, Terminal, TrendingUp, Bot, Home, Download } from 'lucide-reac
 import ClaudeCodeGuide from './ClaudeCodeGuide'
 import OperatorAcademy from './OperatorAcademy'
 import InstallPage from './InstallPage'
+import MarketingSetupPage from './MarketingSetupPage'
+import OpenClawSetupPage from './OpenClawSetupPage'
 
 function HomePage() {
   return (
@@ -127,6 +129,8 @@ export default function App() {
       <Route path="/course" element={<OperatorAcademy />} />
       <Route path="/claude-code-guide" element={<ClaudeCodeGuide />} />
       <Route path="/install" element={<InstallPage />} />
+      <Route path="/setup/marketing" element={<MarketingSetupPage />} />
+      <Route path="/setup/openclaw" element={<OpenClawSetupPage />} />
     </Routes>
   )
 }
