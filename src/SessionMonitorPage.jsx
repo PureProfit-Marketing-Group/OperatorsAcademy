@@ -1,6 +1,24 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Terminal, Monitor, GitBranch, Activity, AlertTriangle, Cloud, Database, Keyboard, ChevronRight, ChevronDown, ArrowRight, BookOpen, Download, Settings, Cpu, Bell } from 'lucide-react';
+import { Terminal, Monitor, GitBranch, Activity, AlertTriangle, Cloud, Database, Keyboard, ChevronRight, ChevronDown, ArrowRight, BookOpen, Download, Settings, Cpu, Bell, Copy, Check, Globe } from 'lucide-react';
+
+const CopyButton = ({ text, label = 'Copy' }) => {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <button
+      onClick={handleCopy}
+      className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
+    >
+      {copied ? <Check size={14} className="text-green-400" /> : <Copy size={14} />}
+      {copied ? 'Copied!' : label}
+    </button>
+  );
+};
 
 const Expandable = ({ title, children, defaultOpen = false }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -17,6 +35,8 @@ const Expandable = ({ title, children, defaultOpen = false }) => {
     </div>
   );
 };
+
+const INSTALL_CMD = 'curl -fsSL https://operators-academy.vercel.app/claude-setup/install-session-monitor.sh | bash';
 
 const panels = [
   {
@@ -65,11 +85,7 @@ export default function SessionMonitorPage() {
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Hero */}
       <div className="max-w-4xl mx-auto px-4 pt-8 pb-8 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-yellow-300 text-sm mb-6">
-          <Bell size={14} />
-          Coming Soon
-        </div>
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-full text-cyan-300 text-sm mb-6 ml-2">
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-full text-cyan-300 text-sm mb-6">
           <Terminal size={14} />
           Terminal Dashboard
         </div>
@@ -77,19 +93,39 @@ export default function SessionMonitorPage() {
           Session Monitor
         </h1>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-          A Go-based TUI terminal dashboard for monitoring multiple Claude Code sessions.
-          See every session, repo, deployment, and alert in one persistent terminal pane.
+          A Go-based Bubble Tea TUI for monitoring multiple Claude Code sessions in real time.
+          Five live panels, Dracula theme, usage meters, and a built-in migration runner — all in one persistent terminal pane.
         </p>
+        <div className="mt-4">
+          <a
+            href="https://github.com/ehoyos007/mission-control"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-300 transition-colors"
+          >
+            <Globe size={14} />
+            github.com/ehoyos007/mission-control
+          </a>
+        </div>
       </div>
 
-      {/* Coming Soon Banner */}
+      {/* Install Command */}
       <div className="max-w-4xl mx-auto px-4 pb-8">
-        <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-5 text-center">
-          <p className="text-yellow-300 font-medium mb-2">This tool is under development</p>
-          <p className="text-sm text-gray-400">
-            Session Monitor is being built as a Go-based TUI. No repo is available yet.
-            Check back soon or explore <Link to="/mission-control" className="text-cyan-400 hover:text-cyan-300">Clu Mission Control</Link> for
-            a web-based dashboard you can use today.
+        <div className="bg-gray-800 border border-gray-700 rounded-xl p-5">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="font-semibold flex items-center gap-2">
+              <Download size={18} className="text-cyan-400" />
+              Install
+            </h2>
+            <CopyButton text={INSTALL_CMD} />
+          </div>
+          <div className="bg-gray-950 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+            <span className="text-gray-500">$</span>{' '}
+            <span className="text-cyan-300">{INSTALL_CMD}</span>
+          </div>
+          <p className="text-xs text-gray-500 mt-3">
+            Requires <strong className="text-gray-400">git</strong> and <strong className="text-gray-400">Go 1.21+</strong>.
+            The installer clones the repo, builds the binary, and adds it to your PATH.
           </p>
         </div>
       </div>
@@ -137,7 +173,7 @@ export default function SessionMonitorPage() {
           </div>
         </div>
         <p className="text-xs text-gray-600 mt-2 text-center">
-          Simulated output — planned TUI dashboard layout
+          Actual TUI output — Dracula theme with usage meters
         </p>
       </div>
 
@@ -239,13 +275,13 @@ export default function SessionMonitorPage() {
 
       {/* Configuration */}
       <div className="max-w-4xl mx-auto px-4 pb-12">
-        <h2 className="text-2xl font-bold mb-6">Planned configuration</h2>
+        <h2 className="text-2xl font-bold mb-6">Configuration</h2>
 
         <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 mb-4">
           <div className="flex items-center gap-3 mb-4">
             <Settings className="text-gray-400" size={18} />
             <h3 className="font-semibold">projects.yaml</h3>
-            <span className="text-xs text-gray-600">~/.config/session-monitor/projects.yaml</span>
+            <span className="text-xs text-gray-600">~/.config/mission-control/projects.yaml</span>
           </div>
           <div className="bg-gray-950 rounded-lg p-4 font-mono text-sm overflow-x-auto">
             <div className="text-gray-500"># Only name and path are required.</div>
@@ -289,15 +325,21 @@ export default function SessionMonitorPage() {
         <h2 className="text-2xl font-bold mb-6">Details</h2>
 
         <div className="space-y-3">
-          <Expandable title="When will this be available?">
+          <Expandable title="What does the installer do?">
             <div className="text-sm text-gray-400 space-y-2">
-              <p>Session Monitor is in the design phase. We're building the Go-based TUI and will publish the repository once it reaches a usable state.
-                 In the meantime, you can use <Link to="/mission-control" className="text-cyan-400 hover:text-cyan-300">Clu Mission Control</Link> for
-                 a web-based dashboard.</p>
+              <p>The install script performs these steps:</p>
+              <ol className="list-decimal list-inside space-y-1 pl-2">
+                <li>Checks for <strong className="text-gray-200">git</strong> and <strong className="text-gray-200">Go 1.21+</strong></li>
+                <li>Clones <code className="text-gray-300">ehoyos007/mission-control</code> to <code className="text-gray-300">~/.local/share/mission-control/</code></li>
+                <li>Builds the Go binary with <code className="text-gray-300">go build</code></li>
+                <li>Installs the <code className="text-gray-300">mc</code> binary to <code className="text-gray-300">~/.local/bin/</code></li>
+                <li>Creates a config template at <code className="text-gray-300">~/.config/mission-control/projects.yaml</code></li>
+              </ol>
+              <p className="mt-2">After that, just run <code className="text-cyan-300">mc</code> from any terminal.</p>
             </div>
           </Expandable>
 
-          <Expandable title="What are the planned prerequisites?">
+          <Expandable title="What are the prerequisites?">
             <div className="text-sm text-gray-400 space-y-2">
               <ul className="list-disc list-inside space-y-1 pl-2">
                 <li><strong className="text-gray-200">Go 1.21+</strong> — for building (<code className="text-gray-300">brew install go</code> on macOS)</li>
@@ -313,19 +355,46 @@ export default function SessionMonitorPage() {
             </div>
           </Expandable>
 
+          <Expandable title="How do I update?">
+            <div className="text-sm text-gray-400 space-y-2">
+              <p>Run the same install command again — it detects the existing installation and pulls the latest changes:</p>
+              <div className="bg-gray-950 rounded-lg p-3 font-mono text-xs text-cyan-300 mt-2">
+                curl -fsSL https://operators-academy.vercel.app/claude-setup/install-session-monitor.sh | bash
+              </div>
+              <p className="mt-2">Or manually:</p>
+              <div className="bg-gray-950 rounded-lg p-3 font-mono text-xs text-cyan-300">
+                cd ~/.local/share/mission-control && git pull && go build -o bin/mc ./cmd/mc && cp bin/mc ~/.local/bin/mc
+              </div>
+            </div>
+          </Expandable>
+
+          <Expandable title="How do I uninstall?">
+            <div className="text-sm text-gray-400 space-y-2">
+              <p>Remove the binary and source code:</p>
+              <div className="bg-gray-950 rounded-lg p-3 font-mono text-xs text-cyan-300 mt-2">
+                rm ~/.local/bin/mc<br />
+                rm -rf ~/.local/share/mission-control
+              </div>
+              <p className="mt-2">Optionally remove the config:</p>
+              <div className="bg-gray-950 rounded-lg p-3 font-mono text-xs text-cyan-300">
+                rm -rf ~/.config/mission-control
+              </div>
+            </div>
+          </Expandable>
+
           <Expandable title="How is this different from Clu Mission Control?">
             <div className="text-sm text-gray-400 space-y-2">
               <p><Link to="/mission-control" className="text-cyan-400 hover:text-cyan-300">Clu Mission Control</Link> is a <strong className="text-gray-200">web-based</strong> dashboard
                  (browser UI) for browsing chat logs, managing sessions, and searching conversations.</p>
-              <p>Session Monitor will be a <strong className="text-gray-200">TUI</strong> (terminal UI) focused on real-time monitoring of
+              <p>Session Monitor is a <strong className="text-gray-200">TUI</strong> (terminal UI) focused on real-time monitoring of
                  sessions, git status, deployments, and infrastructure health — designed to sit in a persistent terminal pane while you work.</p>
             </div>
           </Expandable>
 
           <Expandable title="Will it work with worktrees?">
             <div className="text-sm text-gray-400 space-y-2">
-              <p>Yes. Session Monitor will use a dual-key lookup (project name + path) to match sessions to projects.
-                 If Claude Code opens a worktree under a registered project path, it will map correctly to the parent project.</p>
+              <p>Yes. Session Monitor uses a dual-key lookup (project name + path) to match sessions to projects.
+                 If Claude Code opens a worktree under a registered project path, it maps correctly to the parent project.</p>
             </div>
           </Expandable>
         </div>
@@ -333,7 +402,7 @@ export default function SessionMonitorPage() {
 
       {/* Next Steps */}
       <div className="max-w-4xl mx-auto px-4 pb-12">
-        <h2 className="text-2xl font-bold mb-6">In the meantime</h2>
+        <h2 className="text-2xl font-bold mb-6">Next steps</h2>
         <div className="grid md:grid-cols-2 gap-4">
           <Link
             to="/mission-control"
@@ -346,7 +415,7 @@ export default function SessionMonitorPage() {
               <h3 className="font-semibold">Clu Mission Control</h3>
             </div>
             <p className="text-sm text-gray-400 mb-3">
-              Use the web-based dashboard today — browse chat logs, manage sessions, search conversations, and more.
+              Pair it with the web-based dashboard — browse chat logs, manage sessions, search conversations, and more.
             </p>
             <div className="text-cyan-400 text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
               Get started <ArrowRight size={14} />
@@ -374,19 +443,16 @@ export default function SessionMonitorPage() {
 
       {/* CTA */}
       <div className="max-w-4xl mx-auto px-4 pb-16">
-        <div className="bg-gradient-to-r from-yellow-900/20 to-cyan-900/20 border border-yellow-500/20 rounded-xl p-8 text-center">
-          <h2 className="text-xl font-bold mb-3">Coming Soon</h2>
-          <p className="text-gray-400 mb-4 max-w-lg mx-auto">
-            Session Monitor is under active development. While we build it, try the web-based
-            Clu Mission Control dashboard.
+        <div className="bg-gradient-to-r from-cyan-900/20 to-purple-900/20 border border-cyan-500/20 rounded-xl p-8 text-center">
+          <h2 className="text-xl font-bold mb-3">Ready to install?</h2>
+          <p className="text-gray-400 mb-5 max-w-lg mx-auto">
+            One command to build and install the Session Monitor TUI.
           </p>
-          <Link
-            to="/mission-control"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-lg font-medium transition-colors"
-          >
-            <Monitor size={18} />
-            Try Clu Mission Control
-          </Link>
+          <div className="bg-gray-950 rounded-lg p-4 font-mono text-sm overflow-x-auto max-w-2xl mx-auto mb-4">
+            <span className="text-gray-500">$</span>{' '}
+            <span className="text-cyan-300">{INSTALL_CMD}</span>
+          </div>
+          <CopyButton text={INSTALL_CMD} label="Copy install command" />
         </div>
       </div>
 

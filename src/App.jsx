@@ -133,20 +133,19 @@ function HomePage() {
 
           <Link
             to="/session-monitor"
-            className="group bg-gray-800 border border-gray-700 rounded-xl p-6 hover:border-yellow-500 transition-all hover:shadow-lg hover:shadow-yellow-500/20"
+            className="group bg-gray-800 border border-gray-700 rounded-xl p-6 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/20"
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-3 bg-yellow-500/20 rounded-lg">
-                <Monitor className="text-yellow-400" size={24} />
+              <div className="p-3 bg-cyan-500/20 rounded-lg">
+                <Monitor className="text-cyan-400" size={24} />
               </div>
               <h2 className="text-xl font-semibold">Session Monitor</h2>
-              <span className="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-0.5 rounded-full">Soon</span>
             </div>
             <p className="text-gray-400 text-left">
-              TUI terminal dashboard for monitoring Claude Code sessions, git repos, deployments, and alerts in real-time.
+              Go-based TUI terminal dashboard for monitoring Claude Code sessions, git repos, deployments, and alerts in real-time.
             </p>
-            <div className="mt-4 text-yellow-400 flex items-center gap-2 group-hover:gap-3 transition-all">
-              Learn More <span>&rarr;</span>
+            <div className="mt-4 text-cyan-400 flex items-center gap-2 group-hover:gap-3 transition-all">
+              Get Dashboard <span>&rarr;</span>
             </div>
           </Link>
         </div>
