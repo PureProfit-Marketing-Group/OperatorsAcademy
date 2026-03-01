@@ -638,12 +638,72 @@ Then help me continue.`}</CodeBlock>
 );
 
 // Page: Configuration
-const ConfigurationPage = () => (
+const ConfigurationPage = () => {
+  const installCmd = 'curl -fsSL https://operators-academy.vercel.app/claude-setup/install.sh | bash';
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(installCmd);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
   <div className="space-y-6">
     <h2 className="text-2xl font-bold flex items-center gap-3">
       <Wrench className="text-red-400" />
       Configuration & Setup
     </h2>
+
+    <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-xl p-6">
+      <h3 className="font-semibold mb-2 flex items-center gap-2">
+        <Terminal size={18} className="text-purple-400" />
+        One-Command Install
+      </h3>
+      <p className="text-sm text-gray-400 mb-4">
+        Install the full workflow — CLAUDE.md, 8 agents, status bar, and settings — in one command:
+      </p>
+      <div className="bg-gray-950 rounded-lg p-4 font-mono text-sm flex items-center justify-between gap-4">
+        <div className="overflow-x-auto">
+          <span className="text-gray-500">$ </span>
+          <span className="text-green-400">curl</span>
+          <span className="text-gray-300"> -fsSL https://operators-academy.vercel.app/claude-setup/install.sh </span>
+          <span className="text-gray-500">| </span>
+          <span className="text-green-400">bash</span>
+        </div>
+        <button
+          onClick={handleCopy}
+          className="flex items-center gap-1 px-2 py-1 text-xs bg-gray-700 hover:bg-gray-600 rounded transition-colors flex-shrink-0"
+        >
+          {copied ? <Check size={12} className="text-green-400" /> : <Copy size={12} />}
+          {copied ? 'Copied!' : 'Copy'}
+        </button>
+      </div>
+      <p className="text-xs text-gray-500 mt-3">
+        Backs up existing config before installing. Requires curl and jq.
+      </p>
+    </div>
+
+    <div className="bg-gray-800 rounded-lg p-4">
+      <h3 className="font-semibold mb-3">What the installer sets up</h3>
+      <div className="space-y-3 text-sm">
+        <div className="flex items-start gap-3 p-3 bg-gray-900 rounded">
+          <span className="text-purple-400 font-semibold w-40 flex-shrink-0">CLAUDE.md</span>
+          <span className="text-gray-400">Global instructions with the 5-file doc system and trigger phrases</span>
+        </div>
+        <div className="flex items-start gap-3 p-3 bg-gray-900 rounded">
+          <span className="text-green-400 font-semibold w-40 flex-shrink-0">8 Agents</span>
+          <span className="text-gray-400">backend-architect, test-runner, test-writer-fixer, git-commit, qa-orchestrator, logger, debugger, feature-tester</span>
+        </div>
+        <div className="flex items-start gap-3 p-3 bg-gray-900 rounded">
+          <span className="text-cyan-400 font-semibold w-40 flex-shrink-0">Status bar</span>
+          <span className="text-gray-400">Live terminal display showing model, context usage, git branch, and project name</span>
+        </div>
+        <div className="flex items-start gap-3 p-3 bg-gray-900 rounded">
+          <span className="text-orange-400 font-semibold w-40 flex-shrink-0">settings.json</span>
+          <span className="text-gray-400">Base configuration with status line enabled (preserved if you already have one)</span>
+        </div>
+      </div>
+    </div>
 
     <div className="bg-gray-800 rounded-lg p-4">
       <h3 className="font-semibold mb-3">Configuration Hierarchy</h3>
@@ -670,33 +730,6 @@ const ConfigurationPage = () => (
     </div>
 
     <div className="bg-gray-800 rounded-lg p-4">
-      <h3 className="font-semibold mb-3">Installation Steps</h3>
-      <div className="space-y-4">
-        <div>
-          <div className="text-sm text-gray-400 mb-2">1. Create the .claude directory:</div>
-          <CodeBlock>mkdir -p ~/.claude/agents ~/.claude/templates</CodeBlock>
-        </div>
-        <div>
-          <div className="text-sm text-gray-400 mb-2">2. Create your global CLAUDE.md:</div>
-          <CodeBlock>touch ~/.claude/CLAUDE.md</CodeBlock>
-        </div>
-        <div>
-          <div className="text-sm text-gray-400 mb-2">3. Add agents to the agents folder:</div>
-          <CodeBlock>{`# Copy agent files
-cp logger.md ~/.claude/agents/
-cp feature-tester.md ~/.claude/agents/
-cp debugger.md ~/.claude/agents/
-cp qa-orchestrator.md ~/.claude/agents/`}</CodeBlock>
-        </div>
-        <div>
-          <div className="text-sm text-gray-400 mb-2">4. Initialize a new project:</div>
-          <CodeBlock>{`# In Claude Code, say:
-"Initialize project documentation"`}</CodeBlock>
-        </div>
-      </div>
-    </div>
-
-    <div className="bg-gray-800 rounded-lg p-4">
       <h3 className="font-semibold mb-3">Project File Structure</h3>
       <div className="bg-gray-900 rounded p-4 font-mono text-sm">
         <div className="text-gray-500">project/</div>
@@ -711,7 +744,8 @@ cp qa-orchestrator.md ~/.claude/agents/`}</CodeBlock>
       </div>
     </div>
   </div>
-);
+  );
+};
 
 // Page: Quick Reference
 const QuickReferencePage = () => (

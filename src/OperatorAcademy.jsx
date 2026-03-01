@@ -1544,7 +1544,17 @@ openclaw update
       },
       {
         title: "Configuration Hierarchy",
-        content: `You can set instructions at different levels:
+        content: `**One-Command Install:**
+
+Install the full workflow system — global CLAUDE.md, 8 specialized agents, a live status bar, and base settings — with one command:
+
+\`\`\`
+curl -fsSL https://operators-academy.vercel.app/claude-setup/install.sh | bash
+\`\`\`
+
+This backs up your existing config before installing. Requires curl and jq.
+
+**Configuration levels** (more specific overrides general, like CSS):
 
 | Level | Location | Scope |
 |-------|----------|-------|
@@ -1552,21 +1562,15 @@ openclaw update
 | **Project** | \`./CLAUDE.md\` | Just that specific project |
 | **Local** | \`./CLAUDE.local.md\` | Personal overrides (not shared) |
 
-**Quick Start Command:**
+**After installing, start any project:**
 
 \`\`\`
-# Navigate to your project folder
 cd ~/Projects/my-new-project
-
-# Start Claude Code
 claude
-
-# In Claude Code, say:
-"Initialize project documentation — create CONTEXT.md, TASKS.md, 
-and PROGRESS.md by analyzing the existing codebase."
+# Say: "Initialize project documentation"
 \`\`\`
 
-Claude will analyze your project and create all the documentation files automatically!`
+Claude will analyze your project and create the documentation files (CONTEXT.md, TASKS.md, PROGRESS.md, etc.) automatically!`
       }
     ]
   }
