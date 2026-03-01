@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 const navLinks = [
   { to: '/course', label: 'Course' },
   { to: '/claude-code-guide', label: 'Guide' },
+  { to: '/mission-control', label: 'Mission Control' },
   { to: '/install', label: 'Install' },
 ];
 
