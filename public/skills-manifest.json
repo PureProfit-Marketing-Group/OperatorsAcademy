@@ -80,6 +80,7 @@
       {
         "name": "Paid & Distribution",
         "skills": [
+          { "id": "google-ads-research", "description": "Competitive Google Ads research — analyzes your business, researches competitor ad strategies, and proposes implementation ideas" },
           { "id": "paid-ads", "description": "Create and manage paid advertising campaigns" },
           { "id": "content-strategy", "description": "Plan content calendars and distribution strategies" },
           { "id": "launch-strategy", "description": "Plan and execute product launches" }
@@ -191,6 +192,17 @@
         "Generate 50 marketing ideas ranked by effort vs impact",
         "Create a launch strategy for the referral program",
         "Set up analytics tracking for the referral funnel"
+      ]
+    },
+    {
+      "id": "google-ads-research",
+      "name": "Google Ads Competitor Research",
+      "description": "Analyze competitor ad strategies, find keyword gaps, and build your paid search plan.",
+      "steps": [
+        "Analyze my business from the codebase and present a summary for confirmation",
+        "Research top 3-5 competitors' Google Ads strategies — ad copy, landing pages, keywords, positioning",
+        "Generate a full competitive analysis report and save as google-ads-research.md",
+        "Propose 4-6 implementation ideas based on findings and codebase state, ranked by impact and effort"
       ]
     },
     {

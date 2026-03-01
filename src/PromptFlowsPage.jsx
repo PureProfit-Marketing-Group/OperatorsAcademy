@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, Check, Home, Zap, ArrowRight, Terminal, TrendingUp, Search, Rocket, BarChart3, Mail, Globe, Repeat, ChevronRight, ChevronDown, BookOpen } from 'lucide-react';
+import { Copy, Check, Home, Zap, ArrowRight, Terminal, TrendingUp, Search, Rocket, BarChart3, Mail, Globe, Repeat, ChevronRight, ChevronDown, BookOpen, Target } from 'lucide-react';
 
 const CopyButton = ({ text, label = 'Copy' }) => {
   const [copied, setCopied] = useState(false);
@@ -54,6 +54,7 @@ const FlowCard = ({ icon: Icon, color, title, description, steps, isOpen, onTogg
     orange: { bg: 'bg-orange-500/20', text: 'text-orange-400', border: 'border-orange-500/30', hover: 'hover:border-orange-500' },
     pink: { bg: 'bg-pink-500/20', text: 'text-pink-400', border: 'border-pink-500/30', hover: 'hover:border-pink-500' },
     cyan: { bg: 'bg-cyan-500/20', text: 'text-cyan-400', border: 'border-cyan-500/30', hover: 'hover:border-cyan-500' },
+    green: { bg: 'bg-green-500/20', text: 'text-green-400', border: 'border-green-500/30', hover: 'hover:border-green-500' },
   };
   const c = colorMap[color] || colorMap.blue;
 
@@ -152,6 +153,18 @@ const flows = [
       { prompt: 'Generate 50 marketing ideas ranked by effort vs impact for [product]', note: 'Creates a prioritized backlog from quick wins to moonshots, scored on a 2x2 matrix.' },
       { prompt: 'Create a launch strategy for the referral program', note: 'Plans rollout: soft launch, email announcement, social push, and partner outreach.' },
       { prompt: 'Set up analytics tracking for the referral funnel', note: 'Defines events, funnels, and attribution logic to measure referral program ROI.' },
+    ],
+  },
+  {
+    icon: Target,
+    color: 'green',
+    title: 'Google Ads Competitor Research',
+    description: 'Analyze competitor ad strategies, find keyword gaps, and build your paid search plan.',
+    steps: [
+      { prompt: 'Analyze my business from the codebase — summarize what I sell, who I serve, my positioning, and key differentiators. Present it for me to confirm before moving on.', note: 'Scans your project files (homepage, landing pages, package.json, any marketing context) to build a business profile.' },
+      { prompt: 'Research my top 3-5 competitors\' Google Ads strategies. Find their ad copy, landing pages, keyword targets, CTAs, and positioning. Search for "[competitor] google ads", "[product category] alternatives", and "[competitor] vs" queries.', note: 'Goes online to collect real competitor ad intelligence — headlines, descriptions, offers, and landing page approaches.' },
+      { prompt: 'Generate a full competitive analysis report: what each competitor is doing right, what they\'re doing wrong, keyword opportunities they\'re missing, and strategic gaps I can exploit. Save everything as google-ads-research.md', note: 'Produces a structured .md report with executive summary, per-competitor breakdown, keyword opportunities table, and strategic recommendations.' },
+      { prompt: 'Based on the competitor research and my current codebase, propose 4-6 concrete implementation ideas — like landing pages, comparison pages, ad copy templates, or tracking setup. Rank each by impact and effort, then ask me which to build.', note: 'Assesses what you already have (pages, forms, tracking) and proposes actionable next steps tied to the research findings.' },
     ],
   },
   {
@@ -393,6 +406,7 @@ export default function PromptFlowsPage() {
             category: 'Paid & Distribution',
             color: 'text-purple-400',
             skills: [
+              { name: 'google-ads-research', prompt: 'Run competitor Google Ads research for my business' },
               { name: 'paid-ads', prompt: 'Create Google Ads for [product] targeting [audience]' },
               { name: 'content-strategy', prompt: 'Build a 90-day content strategy for [product]' },
               { name: 'launch-strategy', prompt: 'Create a launch strategy for [product/feature]' },
