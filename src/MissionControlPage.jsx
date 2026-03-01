@@ -429,7 +429,7 @@ export default function MissionControlPage() {
             <CopyButton text={INSTALL_CMD} />
           </div>
           <div className="flex items-center justify-center gap-4 text-sm text-gray-400">
-            <a href="https://github.com/ehoyos007/mission-control" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-cyan-300 transition-colors">
+            <a href="https://github.com/ehoyos007/clu-mission-control" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-cyan-300 transition-colors">
               <GitBranch size={14} />
               View source on GitHub
             </a>
