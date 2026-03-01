@@ -6,8 +6,8 @@ set -e
 #
 # Usage: curl -fsSL https://operators-academy.vercel.app/claude-setup/install-mission-control.sh | bash
 
-REPO_URL="https://github.com/ehoyos007/mission-control.git"
-INSTALL_DIR="$HOME/.local/share/mission-control"
+REPO_URL="https://github.com/ehoyos007/clu-mission-control.git"
+INSTALL_DIR="$HOME/.local/share/clu-mission-control"
 BIN_DIR="$HOME/.local/bin"
 CONFIG_DIR="$HOME/.config/mission-control"
 
@@ -91,7 +91,7 @@ if [ -d "$INSTALL_DIR/.git" ]; then
 else
   mkdir -p "$(dirname "$INSTALL_DIR")"
   git clone --quiet "$REPO_URL" "$INSTALL_DIR"
-  print_success "Cloned to ~/.local/share/mission-control/"
+  print_success "Cloned to ~/.local/share/clu-mission-control/"
 fi
 
 # ── Step 3: Build binary ─────────────────────────────────────────────
@@ -179,7 +179,7 @@ echo -e "  ${GREEN}${BOLD}Installation complete.${NC}"
 echo ""
 echo -e "  ${BOLD}What was installed:${NC}"
 echo -e "  ${DIM}├─${NC} mc binary          ${DIM}~/.local/bin/mc${NC}"
-echo -e "  ${DIM}├─${NC} source code        ${DIM}~/.local/share/mission-control/${NC}"
+echo -e "  ${DIM}├─${NC} source code        ${DIM}~/.local/share/clu-mission-control/${NC}"
 echo -e "  ${DIM}└─${NC} config template    ${DIM}~/.config/mission-control/projects.yaml${NC}"
 echo ""
 echo -e "  ${BOLD}Quick start:${NC}"
