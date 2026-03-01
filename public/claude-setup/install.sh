@@ -52,7 +52,7 @@ print_done() {
   echo ""
 }
 
-TOTAL_STEPS=5
+TOTAL_STEPS=6
 
 print_header
 
@@ -164,6 +164,22 @@ for agent in "${AGENTS[@]}"; do
   print_success "${agent}"
 done
 
+# ── Step 6: Download skills ───────────────────────────────────────────
+
+print_step 6 "Installing skills"
+
+SKILLS_DIR="$CLAUDE_DIR/skills"
+
+SKILLS=(
+  "google-ads-research"
+)
+
+for skill in "${SKILLS[@]}"; do
+  mkdir -p "$SKILLS_DIR/${skill}"
+  curl -fsSL "$BASE_URL/skills/${skill}/SKILL.md" -o "$SKILLS_DIR/${skill}/SKILL.md"
+  print_success "${skill}"
+done
+
 # ── Done ─────────────────────────────────────────────────────────────
 
 print_done
@@ -172,7 +188,8 @@ echo -e "  ${BOLD}What was installed:${NC}"
 echo -e "  ${DIM}├─${NC} CLAUDE.md          ${DIM}Global instructions (5-file doc system)${NC}"
 echo -e "  ${DIM}├─${NC} statusline         ${DIM}Terminal status bar (model + context + git)${NC}"
 echo -e "  ${DIM}├─${NC} settings.json      ${DIM}Base configuration with status line${NC}"
-echo -e "  ${DIM}└─${NC} 8 agents           ${DIM}QA, testing, git, backend, debugging${NC}"
+echo -e "  ${DIM}├─${NC} 8 agents           ${DIM}QA, testing, git, backend, debugging${NC}"
+echo -e "  ${DIM}└─${NC} 1 skill            ${DIM}Google Ads competitor research${NC}"
 echo ""
 
 echo -e "  ${BOLD}Quick start:${NC}"
