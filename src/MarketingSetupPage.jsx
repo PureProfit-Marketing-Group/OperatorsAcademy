@@ -179,14 +179,60 @@ export default function MarketingSetupPage() {
         <h2 className="text-2xl font-bold mb-2">Prompt Library</h2>
         <p className="text-gray-400 text-sm mb-6">Click any prompt to copy it. Paste into Claude Code to get started.</p>
 
-        <div className="grid md:grid-cols-2 gap-3">
+        <h3 className="text-sm font-semibold text-gray-300 mb-3">Start here</h3>
+        <div className="grid md:grid-cols-2 gap-3 mb-6">
           <CopyablePrompt prompt="Create my product marketing context document" />
-          <CopyablePrompt prompt="Run a CRO audit on [URL]" />
           <CopyablePrompt prompt="Write homepage copy for [product]" />
-          <CopyablePrompt prompt="Build a welcome email sequence" />
-          <CopyablePrompt prompt="Run an SEO audit on my site" />
-          <CopyablePrompt prompt="Generate comparison pages for [competitor]" />
         </div>
+
+        <h3 className="text-sm font-semibold text-gray-300 mb-3">Conversion & CRO</h3>
+        <div className="grid md:grid-cols-2 gap-3 mb-6">
+          <CopyablePrompt prompt="Run a CRO audit on [URL]" />
+          <CopyablePrompt prompt="Audit my signup flow for conversion blockers" />
+          <CopyablePrompt prompt="Optimize the onboarding experience for new users" />
+          <CopyablePrompt prompt="Create an exit-intent popup for [page URL]" />
+        </div>
+
+        <h3 className="text-sm font-semibold text-gray-300 mb-3">SEO & Content</h3>
+        <div className="grid md:grid-cols-2 gap-3 mb-6">
+          <CopyablePrompt prompt="Run an SEO audit on my site at [URL]" />
+          <CopyablePrompt prompt="Generate programmatic SEO pages for [business type]" />
+          <CopyablePrompt prompt="Create a '[competitor] alternatives' page" />
+          <CopyablePrompt prompt="Build a 90-day content strategy for [product]" />
+        </div>
+
+        <h3 className="text-sm font-semibold text-gray-300 mb-3">Email & Ads</h3>
+        <div className="grid md:grid-cols-2 gap-3 mb-6">
+          <CopyablePrompt prompt="Build a 5-email welcome sequence for [product]" />
+          <CopyablePrompt prompt="Create Google Ads for [product] targeting [audience]" />
+          <CopyablePrompt prompt="Write a re-engagement sequence for churned users" />
+          <CopyablePrompt prompt="Design a product launch email series" />
+        </div>
+
+        <h3 className="text-sm font-semibold text-gray-300 mb-3">Growth & Strategy</h3>
+        <div className="grid md:grid-cols-2 gap-3 mb-6">
+          <CopyablePrompt prompt="Design a referral program for [product]" />
+          <CopyablePrompt prompt="Generate 50 marketing ideas ranked by effort vs impact" />
+          <CopyablePrompt prompt="What free tools could drive signups for [product]?" />
+          <CopyablePrompt prompt="Analyze and optimize pricing for [product]" />
+        </div>
+
+        {/* Link to full prompt flows */}
+        <Link
+          to="/prompt-flows"
+          className="block bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border border-cyan-500/30 rounded-xl p-4 hover:border-cyan-500 transition-all group"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Zap size={16} className="text-cyan-400" />
+              <div>
+                <p className="text-sm font-medium text-cyan-300">Want multi-step workflows?</p>
+                <p className="text-xs text-gray-400">Browse 6 complete prompt flows — launch, SEO, CRO, growth, email, and competitor capture.</p>
+              </div>
+            </div>
+            <ArrowRight size={16} className="text-cyan-400 group-hover:translate-x-1 transition-transform" />
+          </div>
+        </Link>
       </div>
 
       {/* FAQ */}
@@ -234,15 +280,20 @@ export default function MarketingSetupPage() {
             </div>
             <CopyButton text={NPX_CMD} />
           </div>
-          <div className="flex items-center justify-center gap-4 text-sm text-gray-400">
+          <div className="flex items-center justify-center gap-4 text-sm text-gray-400 flex-wrap">
+            <Link to="/prompt-flows" className="flex items-center gap-1 hover:text-cyan-300 transition-colors">
+              <Zap size={14} />
+              Prompt flows
+            </Link>
+            <span className="text-gray-600">|</span>
             <Link to="/course#module5" className="flex items-center gap-1 hover:text-teal-300 transition-colors">
               <BookOpen size={14} />
-              Marketing module in the course
+              Marketing module
             </Link>
             <span className="text-gray-600">|</span>
             <Link to="/install" className="flex items-center gap-1 hover:text-purple-300 transition-colors">
               <ArrowRight size={14} />
-              Install the workflow
+              Install workflow
             </Link>
           </div>
         </div>

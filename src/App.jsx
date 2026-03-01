@@ -1,11 +1,12 @@
 import React from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
-import { BookOpen, Terminal, TrendingUp, Bot, Home, Download } from 'lucide-react'
+import { BookOpen, Terminal, TrendingUp, Bot, Home, Download, Zap } from 'lucide-react'
 import ClaudeCodeGuide from './ClaudeCodeGuide'
 import OperatorAcademy from './OperatorAcademy'
 import InstallPage from './InstallPage'
 import MarketingSetupPage from './MarketingSetupPage'
 import OpenClawSetupPage from './OpenClawSetupPage'
+import PromptFlowsPage from './PromptFlowsPage'
 
 function HomePage() {
   return (
@@ -74,6 +75,24 @@ function HomePage() {
           </Link>
 
           <Link
+            to="/prompt-flows"
+            className="group bg-gray-800 border border-gray-700 rounded-xl p-6 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/20"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-3 bg-cyan-500/20 rounded-lg">
+                <Zap className="text-cyan-400" size={24} />
+              </div>
+              <h2 className="text-xl font-semibold">Prompt Flows</h2>
+            </div>
+            <p className="text-gray-400 text-left">
+              Copy-paste prompt sequences for Claude Code. Launch products, capture SEO traffic, optimize conversions, and more.
+            </p>
+            <div className="mt-4 text-cyan-400 flex items-center gap-2 group-hover:gap-3 transition-all">
+              Browse Flows <span>&rarr;</span>
+            </div>
+          </Link>
+
+          <Link
             to="/claude-code-guide"
             className="group bg-gray-800 border border-gray-700 rounded-xl p-6 hover:border-purple-500 transition-all hover:shadow-lg hover:shadow-purple-500/20"
           >
@@ -131,6 +150,7 @@ export default function App() {
       <Route path="/install" element={<InstallPage />} />
       <Route path="/setup/marketing" element={<MarketingSetupPage />} />
       <Route path="/setup/openclaw" element={<OpenClawSetupPage />} />
+      <Route path="/prompt-flows" element={<PromptFlowsPage />} />
     </Routes>
   )
 }
