@@ -8,6 +8,7 @@ const toolsLinks = [
   { to: '/tools/prompt-flows', label: 'Prompt Flows' },
   { to: '/tools/mission-control', label: 'Mission Control' },
   { to: '/tools/session-monitor', label: 'Session Monitor' },
+  { to: '/tools/coop', label: 'Co-Op Mode' },
 ];
 
 const allMobileLinks = [
@@ -19,6 +20,7 @@ const allMobileLinks = [
   { to: '/tools/session-monitor', label: 'Session Monitor' },
   { to: '/setup/marketing', label: 'Marketing Setup' },
   { to: '/setup/openclaw', label: 'OpenClaw Setup' },
+  { to: '/tools/coop', label: 'Co-Op Mode' },
 ];
 
 export default function SiteNav() {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, Link, Navigate, useLocation } from 'react-router-dom'
-import { BookOpen, Terminal, TrendingUp, Bot, Download, Zap, Monitor, Globe, ArrowRight, ChevronRight } from 'lucide-react'
+import { BookOpen, Terminal, TrendingUp, Bot, Download, Zap, Monitor, Globe, Users, ArrowRight, ChevronRight } from 'lucide-react'
 import SiteNav from './components/SiteNav'
 import CourseLayout from './components/CourseLayout'
 import StartHere from './course/StartHere'
@@ -18,6 +18,7 @@ import PromptFlowsPage from './PromptFlowsPage'
 import MissionControlPage from './MissionControlPage'
 import SessionMonitorPage from './SessionMonitorPage'
 import ClaudeCodeGuide from './ClaudeCodeGuide'
+import CoopPage from './CoopPage'
 
 const courseModules = [
   { to: '/course', label: 'What is an Operator?', description: 'Learn the mindset behind building AI-powered systems', icon: BookOpen, color: 'blue' },
@@ -171,6 +172,19 @@ function HomePage() {
             </div>
             <p className="text-gray-400 text-sm">Terminal dashboard for monitoring Claude Code sessions and deployments.</p>
           </Link>
+
+          <Link
+            to="/tools/coop"
+            className="group bg-gradient-to-r from-green-900/30 to-teal-900/30 border border-green-500/30 rounded-xl p-5 hover:border-green-500 transition-all hover:shadow-lg hover:shadow-green-500/20"
+          >
+            <div className="flex items-center gap-3 mb-2">
+              <div className="p-2 bg-green-500/20 rounded-lg">
+                <Users className="text-green-400" size={20} />
+              </div>
+              <h3 className="font-semibold">Co-Op Mode</h3>
+            </div>
+            <p className="text-gray-400 text-sm">Multiplayer plugin for 2-3 developers using Claude Code on the same project.</p>
+          </Link>
         </div>
       </div>
 
@@ -216,6 +230,7 @@ export default function App() {
         <Route path="/tools/mission-control" element={<MissionControlPage />} />
         <Route path="/tools/session-monitor" element={<SessionMonitorPage />} />
         <Route path="/tools/claude-code-guide" element={<ClaudeCodeGuide />} />
+        <Route path="/tools/coop" element={<CoopPage />} />
 
         {/* Redirect old routes */}
         <Route path="/claude-code-guide" element={<Navigate to="/tools/claude-code-guide" replace />} />
