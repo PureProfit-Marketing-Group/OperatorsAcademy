@@ -6,16 +6,16 @@
 
 ### Last 10 Commits
 ```
-00abe17 Add Vision System card to homepage Tools grid (9 seconds ago)
-905f119 📊 Auto-update PROGRESS.md (56 seconds ago)
-acc81bc Add password-protected Vision System cheat sheet page (68 seconds ago)
+e8f0883 Block crawlers and AI tools from Vision System page (31 seconds ago)
+03cdc35 📊 Auto-update PROGRESS.md (3 minutes ago)
+00abe17 Add Vision System card to homepage Tools grid (4 minutes ago)
+905f119 📊 Auto-update PROGRESS.md (4 minutes ago)
+acc81bc Add password-protected Vision System cheat sheet page (5 minutes ago)
 02624d2 📊 Auto-update PROGRESS.md (15 hours ago)
 3fb26f1 Fix stale links, deduplicate components, rewrite module openers, delete dead code (15 hours ago)
 dae03a0 📊 Auto-update PROGRESS.md (15 hours ago)
 7ec0dfc Extract shared components, fix stale links, rewrite module openers (15 hours ago)
 3ed1775 Add Claude Co-Op as installable tool (15 hours ago)
-3d6f6bc 📊 Auto-update PROGRESS.md (16 hours ago)
-92aae73 Update PROGRESS.md with Session 16 — Vercel Analytics setup (16 hours ago)
 ```
 
 ### Open Issues
