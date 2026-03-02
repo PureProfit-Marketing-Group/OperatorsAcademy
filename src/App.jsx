@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, Link, Navigate, useLocation } from 'react-router-dom'
-import { BookOpen, Terminal, TrendingUp, Bot, Download, Zap, Monitor, Globe, Users, ArrowRight, ChevronRight } from 'lucide-react'
+import { BookOpen, Terminal, TrendingUp, Bot, Download, Zap, Monitor, Globe, Users, ArrowRight, ChevronRight, Eye } from 'lucide-react'
 import SiteNav from './components/SiteNav'
 import CourseLayout from './components/CourseLayout'
 import StartHere from './course/StartHere'
@@ -185,6 +185,22 @@ function HomePage() {
               <h3 className="font-semibold">Co-Op Mode</h3>
             </div>
             <p className="text-gray-400 text-sm">Multiplayer plugin for 2-3 developers using Claude Code on the same project.</p>
+          </Link>
+
+          <Link
+            to="/tools/vision-system"
+            className="group bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-600/40 rounded-xl p-5 hover:border-gray-500 transition-all hover:shadow-lg hover:shadow-white/5 relative overflow-hidden"
+          >
+            <div className="absolute top-3 right-3 px-2 py-0.5 bg-white/5 border border-white/10 rounded text-[10px] text-gray-500 uppercase tracking-wider">
+              Locked
+            </div>
+            <div className="flex items-center gap-3 mb-2">
+              <div className="p-2 bg-white/5 rounded-lg">
+                <Eye className="text-gray-400" size={20} />
+              </div>
+              <h3 className="font-semibold text-gray-300">The Vision System</h3>
+            </div>
+            <p className="text-gray-500 text-sm">Internal playbook. Password required.</p>
           </Link>
         </div>
       </div>
