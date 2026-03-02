@@ -1,40 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, Check, Terminal, ChevronRight, ChevronDown, Home, ArrowRight, TrendingUp, Zap, BookOpen, Package, Bot } from 'lucide-react';
-
-const CopyButton = ({ text, label = 'Copy' }) => {
-  const [copied, setCopied] = useState(false);
-  const handleCopy = () => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-  return (
-    <button
-      onClick={handleCopy}
-      className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-    >
-      {copied ? <Check size={14} className="text-green-400" /> : <Copy size={14} />}
-      {copied ? 'Copied!' : label}
-    </button>
-  );
-};
-
-const Expandable = ({ title, children, defaultOpen = false }) => {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
-  return (
-    <div className="border border-gray-700 rounded-lg overflow-hidden">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center gap-3 p-4 bg-gray-800/50 hover:bg-gray-800 transition-colors text-left"
-      >
-        <span className="flex-1 font-medium text-gray-200">{title}</span>
-        {isOpen ? <ChevronDown size={18} className="text-gray-400" /> : <ChevronRight size={18} className="text-gray-400" />}
-      </button>
-      {isOpen && <div className="p-4 border-t border-gray-700">{children}</div>}
-    </div>
-  );
-};
+import { Copy, Check, Terminal, Home, ArrowRight, TrendingUp, Zap, BookOpen, Package, Bot } from 'lucide-react';
+import CopyButton from './components/CopyButton';
+import Expandable from './components/Expandable';
 
 const CopyablePrompt = ({ prompt }) => {
   const [copied, setCopied] = useState(false);
@@ -101,7 +69,7 @@ export default function MarketingSetupPage() {
               </div>
               <div>
                 <p className="text-sm text-gray-300">Operators Academy workflow installed</p>
-                <Link to="/install" className="text-xs text-teal-400 hover:text-teal-300 transition-colors">
+                <Link to="/tools/install" className="text-xs text-teal-400 hover:text-teal-300 transition-colors">
                   Install the workflow →
                 </Link>
               </div>
@@ -211,7 +179,7 @@ export default function MarketingSetupPage() {
 
         {/* Link to full prompt flows */}
         <Link
-          to="/prompt-flows"
+          to="/tools/prompt-flows"
           className="block bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border border-cyan-500/30 rounded-xl p-4 hover:border-cyan-500 transition-all group"
         >
           <div className="flex items-center justify-between">
@@ -254,7 +222,7 @@ export default function MarketingSetupPage() {
           <Expandable title="Do I need the Operators Academy workflow installed?">
             <div className="text-sm text-gray-400 space-y-2">
               <p>No, Marketing Skills work with any Claude Code setup. However, the Operators Academy workflow adds session continuity, documentation tracking, and specialized agents that make the skills more effective.</p>
-              <p>We recommend installing both for the best experience. <Link to="/install" className="text-teal-400 hover:text-teal-300">Install the workflow →</Link></p>
+              <p>We recommend installing both for the best experience. <Link to="/tools/install" className="text-teal-400 hover:text-teal-300">Install the workflow →</Link></p>
             </div>
           </Expandable>
         </div>
@@ -273,7 +241,7 @@ export default function MarketingSetupPage() {
             <CopyButton text={NPX_CMD} />
           </div>
           <div className="flex items-center justify-center gap-4 text-sm text-gray-400 flex-wrap">
-            <Link to="/prompt-flows" className="flex items-center gap-1 hover:text-cyan-300 transition-colors">
+            <Link to="/tools/prompt-flows" className="flex items-center gap-1 hover:text-cyan-300 transition-colors">
               <Zap size={14} />
               Prompt flows
             </Link>
@@ -283,7 +251,7 @@ export default function MarketingSetupPage() {
               Marketing module
             </Link>
             <span className="text-gray-600">|</span>
-            <Link to="/install" className="flex items-center gap-1 hover:text-purple-300 transition-colors">
+            <Link to="/tools/install" className="flex items-center gap-1 hover:text-purple-300 transition-colors">
               <ArrowRight size={14} />
               Install workflow
             </Link>

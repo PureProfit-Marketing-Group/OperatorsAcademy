@@ -1,40 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, Check, Terminal, ChevronRight, ChevronDown, Home, ArrowRight, Bot, BookOpen, Server, Laptop, TrendingUp } from 'lucide-react';
-
-const CopyButton = ({ text, label = 'Copy' }) => {
-  const [copied, setCopied] = useState(false);
-  const handleCopy = () => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-  return (
-    <button
-      onClick={handleCopy}
-      className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-    >
-      {copied ? <Check size={14} className="text-green-400" /> : <Copy size={14} />}
-      {copied ? 'Copied!' : label}
-    </button>
-  );
-};
-
-const Expandable = ({ title, children, defaultOpen = false }) => {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
-  return (
-    <div className="border border-gray-700 rounded-lg overflow-hidden">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center gap-3 p-4 bg-gray-800/50 hover:bg-gray-800 transition-colors text-left"
-      >
-        <span className="flex-1 font-medium text-gray-200">{title}</span>
-        {isOpen ? <ChevronDown size={18} className="text-gray-400" /> : <ChevronRight size={18} className="text-gray-400" />}
-      </button>
-      {isOpen && <div className="p-4 border-t border-gray-700">{children}</div>}
-    </div>
-  );
-};
+import { Copy, Check, Terminal, Home, ArrowRight, Bot, BookOpen, Server, Laptop, TrendingUp } from 'lucide-react';
+import CopyButton from './components/CopyButton';
+import Expandable from './components/Expandable';
 
 const CopyablePrompt = ({ prompt }) => {
   const [copied, setCopied] = useState(false);
@@ -333,7 +301,7 @@ export default function OpenClawSetupPage() {
               OpenClaw module in the course
             </Link>
             <span className="text-gray-600">|</span>
-            <Link to="/install" className="flex items-center gap-1 hover:text-purple-300 transition-colors">
+            <Link to="/tools/install" className="flex items-center gap-1 hover:text-purple-300 transition-colors">
               <ArrowRight size={14} />
               Install the workflow
             </Link>

@@ -1,40 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, Check, Monitor, GitBranch, ArrowRight, BookOpen, Download, Globe, MessageSquare, Search, Upload, Calendar, Eye, Server, ListTodo, Activity, ChevronRight, ChevronDown } from 'lucide-react';
-
-const CopyButton = ({ text, label = 'Copy' }) => {
-  const [copied, setCopied] = useState(false);
-  const handleCopy = () => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-  return (
-    <button
-      onClick={handleCopy}
-      className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-    >
-      {copied ? <Check size={14} className="text-green-400" /> : <Copy size={14} />}
-      {copied ? 'Copied!' : label}
-    </button>
-  );
-};
-
-const Expandable = ({ title, children, defaultOpen = false }) => {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
-  return (
-    <div className="border border-gray-700 rounded-lg overflow-hidden">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center gap-3 p-4 bg-gray-800/50 hover:bg-gray-800 transition-colors text-left"
-      >
-        <span className="flex-1 font-medium text-gray-200">{title}</span>
-        {isOpen ? <ChevronDown size={18} className="text-gray-400" /> : <ChevronRight size={18} className="text-gray-400" />}
-      </button>
-      {isOpen && <div className="p-4 border-t border-gray-700">{children}</div>}
-    </div>
-  );
-};
+import { Monitor, GitBranch, ArrowRight, Download, Globe, MessageSquare, Search, Upload, Calendar, Eye, Server, ListTodo, Activity } from 'lucide-react';
+import CopyButton from './components/CopyButton';
+import Expandable from './components/Expandable';
 
 const INSTALL_CMD = 'curl -fsSL https://operators-academy.vercel.app/claude-setup/install-mission-control.sh | bash';
 
@@ -320,7 +288,7 @@ export default function MissionControlPage() {
           <Expandable title="Is this the same as the TUI terminal dashboard?">
             <div className="text-sm text-gray-400 space-y-2">
               <p>No. Clu Mission Control is a <strong className="text-gray-200">web-based</strong> dashboard that runs in your browser.
-                 We're separately developing a <Link to="/session-monitor" className="text-cyan-400 hover:text-cyan-300">TUI Session Monitor</Link> for
+                 We're separately developing a <Link to="/tools/session-monitor" className="text-cyan-400 hover:text-cyan-300">TUI Session Monitor</Link> for
                  terminal-based monitoring — check that page for details.</p>
             </div>
           </Expandable>
@@ -332,7 +300,7 @@ export default function MissionControlPage() {
         <h2 className="text-2xl font-bold mb-6">Next steps</h2>
         <div className="grid md:grid-cols-2 gap-4">
           <Link
-            to="/session-monitor"
+            to="/tools/session-monitor"
             className="group bg-gray-800 border border-gray-700 rounded-xl p-5 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/10"
           >
             <div className="flex items-center gap-3 mb-3">
@@ -349,7 +317,7 @@ export default function MissionControlPage() {
             </div>
           </Link>
           <Link
-            to="/install"
+            to="/tools/install"
             className="group bg-gray-800 border border-gray-700 rounded-xl p-5 hover:border-purple-500 transition-all hover:shadow-lg hover:shadow-purple-500/10"
           >
             <div className="flex items-center gap-3 mb-3">

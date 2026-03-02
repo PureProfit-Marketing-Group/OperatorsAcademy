@@ -1,24 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Copy, Check, Home, Zap, ArrowRight, Terminal, TrendingUp, Search, Rocket, BarChart3, Mail, Globe, Repeat, ChevronRight, ChevronDown, BookOpen, Target } from 'lucide-react';
-
-const CopyButton = ({ text, label = 'Copy' }) => {
-  const [copied, setCopied] = useState(false);
-  const handleCopy = () => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-  return (
-    <button
-      onClick={handleCopy}
-      className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-    >
-      {copied ? <Check size={14} className="text-green-400" /> : <Copy size={14} />}
-      {copied ? 'Copied!' : label}
-    </button>
-  );
-};
+import CopyButton from './components/CopyButton';
 
 const CopyableStep = ({ number, prompt, note }) => {
   const [copied, setCopied] = useState(false);
@@ -484,7 +467,7 @@ export default function PromptFlowsPage() {
               Install Marketing Skills
             </Link>
             <Link
-              to="/install"
+              to="/tools/install"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-purple-500/20 border border-purple-500/30 rounded-lg text-purple-300 hover:bg-purple-500/30 transition-colors text-sm font-medium"
             >
               <Terminal size={16} />

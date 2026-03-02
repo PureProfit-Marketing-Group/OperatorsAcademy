@@ -44,7 +44,7 @@ By the end of this course, you'll be able to go from an idea to a working AI-pow
     sections: [
       {
         title: "1.1 Creating Your Account",
-        content: `Getting started with Claude.ai is simple:
+        content: `In the next 5 minutes, you'll have access to an AI that can draft entire marketing campaigns, analyze your competitors, and help you think through business problems — for free. Here's how to get set up:
 
 1. Go to **claude.ai** in your web browser
 2. Click "Sign up" or "Get started"
@@ -318,7 +318,7 @@ Agent Teams are experimental. Be aware of these constraints:
     sections: [
       {
         title: "3.1 What is n8n?",
-        content: `**n8n** (pronounced "nodemation") is a workflow automation tool. It lets you connect different apps and services together to create automated processes.
+        content: `Imagine a new lead fills out your contact form at 2 AM. Before you wake up, they've received a personalized email, their info has been added to your CRM, and your team has been notified in Slack. That's what **n8n** (pronounced "nodemation") does — it connects your apps and runs automated workflows without you lifting a finger.
 
 **Examples of what you can automate:**
 \u2022 When a new lead comes in \u2192 Send them a personalized email
@@ -365,7 +365,7 @@ Agent Teams are experimental. Be aware of these constraints:
     sections: [
       {
         title: "The Operator Stack",
-        content: `Now you understand the three pillars of the Operator stack:
+        content: `A business owner spends 3 hours every morning manually sorting leads, copying data between apps, and sending follow-up emails. An Operator builds a tool that does all of it automatically — in about a week. Here's how the three tools work together to make that happen:
 
 | Tool | Role | Analogy |
 |------|------|---------|
@@ -1525,7 +1525,7 @@ openclaw update
     sections: [
       {
         title: "The Core Concept",
-        content: `As you build more complex projects with Claude Code, you'll need a system to keep track of everything. This is the **Project Startup System** \u2014 a documentation structure that helps Claude understand your project and helps you maintain continuity across sessions.`,
+        content: `You come back to a project after a week away. Instead of spending 30 minutes re-explaining where you left off, you type "let's continue" \u2014 and Claude picks up exactly where you stopped, knows every decision you've made, and recommends what to tackle next. That's what the **Project Startup System** gives you \u2014 a documentation structure that helps Claude understand your project and maintain continuity across sessions.`,
         analogy: "Think of this like a hospital shift change log. When nurses change shifts, they don't just say 'good luck!' \u2014 they hand over detailed notes about each patient. Since Claude doesn't remember between sessions, your documentation files serve as that handover."
       },
       {

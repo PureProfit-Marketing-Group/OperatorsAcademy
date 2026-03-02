@@ -1,24 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, CheckSquare, Target, Clock, TestTube, Copy, Check, ChevronRight, ChevronDown, FolderOpen, Terminal, MessageSquare, Wrench, BookOpen, ArrowRight, Download, Layers } from 'lucide-react';
-
-// Copy button component
-const CopyButton = ({ text }) => {
-  const [copied, setCopied] = useState(false);
-  const handleCopy = () => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-  return (
-    <button
-      onClick={handleCopy}
-      className="flex items-center gap-1 px-2 py-1 text-xs bg-gray-700 hover:bg-gray-600 rounded transition-colors"
-    >
-      {copied ? <Check size={12} className="text-green-400" /> : <Copy size={12} />}
-      {copied ? 'Copied!' : 'Copy'}
-    </button>
-  );
-};
+import { Copy, Check, ChevronRight, ChevronDown, FolderOpen, Terminal, MessageSquare, Wrench, BookOpen, ArrowRight, Download, Layers } from 'lucide-react';
+import CopyButton from './components/CopyButton';
 
 // Code block component
 const CodeBlock = ({ children, copyable = true }) => (
@@ -34,7 +16,7 @@ const CodeBlock = ({ children, copyable = true }) => (
   </div>
 );
 
-// Expandable section component
+// Expandable section component (custom variant for this page)
 const Expandable = ({ title, children, defaultOpen = false }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   return (
