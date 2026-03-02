@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Lock, Eye, FileText, Gauge, Layers, Shield, RotateCcw, ClipboardCheck, Compass, Target, Terminal } from 'lucide-react';
 
 const EXPECTED_HASH = 'ae5ce162888ee3ebe974976cac5ab94a3f55049f8515884883d579fb3fa378d2';
@@ -359,6 +359,14 @@ function CheatSheet() {
 
 export default function VisionSystemGuide() {
   const [unlocked, setUnlocked] = useState(() => localStorage.getItem('vs-auth') === 'true');
+
+  useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'noindex, nofollow';
+    document.head.appendChild(meta);
+    return () => document.head.removeChild(meta);
+  }, []);
 
   if (!unlocked) return <PasswordGate onUnlock={() => setUnlocked(true)} />;
   return <CheatSheet />;
