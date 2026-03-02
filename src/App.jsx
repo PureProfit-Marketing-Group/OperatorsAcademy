@@ -19,6 +19,7 @@ import MissionControlPage from './MissionControlPage'
 import SessionMonitorPage from './SessionMonitorPage'
 import ClaudeCodeGuide from './ClaudeCodeGuide'
 import CoopPage from './CoopPage'
+import VisionSystemGuide from './VisionSystemGuide'
 
 const courseModules = [
   { to: '/course', label: 'What is an Operator?', description: 'Learn the mindset behind building AI-powered systems', icon: BookOpen, color: 'blue' },
@@ -231,6 +232,7 @@ export default function App() {
         <Route path="/tools/session-monitor" element={<SessionMonitorPage />} />
         <Route path="/tools/claude-code-guide" element={<ClaudeCodeGuide />} />
         <Route path="/tools/coop" element={<CoopPage />} />
+        <Route path="/tools/vision-system" element={<VisionSystemGuide />} />
 
         {/* Redirect old routes */}
         <Route path="/claude-code-guide" element={<Navigate to="/tools/claude-code-guide" replace />} />
