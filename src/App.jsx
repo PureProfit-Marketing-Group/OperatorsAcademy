@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, Link, Navigate, useLocation } from 'react-router-dom'
 import { BookOpen, Terminal, TrendingUp, Bot, Download, Zap, Monitor, Globe, Users, ArrowRight, ChevronRight, Eye } from 'lucide-react'
+import { AuthProvider } from './context/AuthContext'
+import AuthModal from './components/AuthModal'
+import CookieBanner from './components/CookieBanner'
+import GatedRoute from './components/GatedRoute'
 import SiteNav from './components/SiteNav'
 import CourseLayout from './components/CourseLayout'
 import StartHere from './course/StartHere'
@@ -20,6 +24,7 @@ import SessionMonitorPage from './SessionMonitorPage'
 import ClaudeCodeGuide from './ClaudeCodeGuide'
 import CoopPage from './CoopPage'
 import VisionSystemGuide from './VisionSystemGuide'
+import PrivacyPage from './PrivacyPage'
 
 const courseModules = [
   { to: '/course', label: 'What is an Operator?', description: 'Learn the mindset behind building AI-powered systems', icon: BookOpen, color: 'blue' },
@@ -222,14 +227,16 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <>
+    <AuthProvider>
       <SiteNav />
       <ScrollToTop />
+      <AuthModal />
+      <CookieBanner />
       <div className="pt-12">
       <Routes>
         <Route path="/" element={<HomePage />} />
 
-        {/* Course routes with shared layout */}
+        {/* Course routes with shared layout — public */}
         <Route path="/course" element={<CourseLayout />}>
           <Route index element={<StartHere />} />
           <Route path="claude-ai" element={<ClaudeAI />} />
@@ -241,27 +248,30 @@ export default function App() {
           <Route path="project-system" element={<ProjectSystem />} />
         </Route>
 
-        {/* Tools routes */}
-        <Route path="/tools/install" element={<InstallPage />} />
-        <Route path="/tools/prompt-flows" element={<PromptFlowsPage />} />
-        <Route path="/tools/mission-control" element={<MissionControlPage />} />
-        <Route path="/tools/session-monitor" element={<SessionMonitorPage />} />
-        <Route path="/tools/claude-code-guide" element={<ClaudeCodeGuide />} />
-        <Route path="/tools/coop" element={<CoopPage />} />
-        <Route path="/tools/vision-system" element={<VisionSystemGuide />} />
+        {/* Tools routes — gated */}
+        <Route path="/tools/install" element={<GatedRoute><InstallPage /></GatedRoute>} />
+        <Route path="/tools/prompt-flows" element={<GatedRoute><PromptFlowsPage /></GatedRoute>} />
+        <Route path="/tools/mission-control" element={<GatedRoute><MissionControlPage /></GatedRoute>} />
+        <Route path="/tools/session-monitor" element={<GatedRoute><SessionMonitorPage /></GatedRoute>} />
+        <Route path="/tools/claude-code-guide" element={<GatedRoute><ClaudeCodeGuide /></GatedRoute>} />
+        <Route path="/tools/coop" element={<GatedRoute><CoopPage /></GatedRoute>} />
+        <Route path="/tools/vision-system" element={<GatedRoute><VisionSystemGuide /></GatedRoute>} />
+
+        {/* Privacy — public */}
+        <Route path="/privacy" element={<PrivacyPage />} />
 
         {/* Redirect old routes */}
         <Route path="/claude-code-guide" element={<Navigate to="/tools/claude-code-guide" replace />} />
 
         {/* Keep old setup routes working */}
         <Route path="/install" element={<Navigate to="/tools/install" replace />} />
-        <Route path="/setup/marketing" element={<MarketingSetupPage />} />
-        <Route path="/setup/openclaw" element={<OpenClawSetupPage />} />
+        <Route path="/setup/marketing" element={<GatedRoute><MarketingSetupPage /></GatedRoute>} />
+        <Route path="/setup/openclaw" element={<GatedRoute><OpenClawSetupPage /></GatedRoute>} />
         <Route path="/prompt-flows" element={<Navigate to="/tools/prompt-flows" replace />} />
         <Route path="/mission-control" element={<Navigate to="/tools/mission-control" replace />} />
         <Route path="/session-monitor" element={<Navigate to="/tools/session-monitor" replace />} />
       </Routes>
       </div>
-    </>
+    </AuthProvider>
   )
 }

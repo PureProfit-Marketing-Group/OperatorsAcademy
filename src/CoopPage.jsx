@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Users, GitBranch, ListChecks, Eye, Shield, Terminal, ArrowRight, BookOpen, Download, MessageCircle, GitMerge } from 'lucide-react';
-import CopyButton from './components/CopyButton';
+import GatedCopyButton from './components/GatedCopyButton';
 import Expandable from './components/Expandable';
 
 const INSTALL_CMD = 'curl -fsSL https://operators-academy.vercel.app/claude-setup/install-coop.sh | bash';
@@ -72,7 +72,7 @@ export default function CoopPage() {
         <div className="bg-gray-800 border border-gray-700 rounded-xl p-6">
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm text-gray-400 font-medium">Run in your terminal:</span>
-            <CopyButton text={INSTALL_CMD} />
+            <GatedCopyButton text={INSTALL_CMD} />
           </div>
           <div className="bg-gray-950 rounded-lg p-4 font-mono text-sm overflow-x-auto">
             <span className="text-gray-500">$ </span>
@@ -399,7 +399,7 @@ export default function CoopPage() {
               <span className="text-gray-500">| </span>
               <span className="text-green-400">bash</span>
             </div>
-            <CopyButton text={INSTALL_CMD} />
+            <GatedCopyButton text={INSTALL_CMD} />
           </div>
           <div className="flex items-center justify-center gap-4 text-sm text-gray-400">
             <Link to="/tools/install" className="flex items-center gap-1 hover:text-purple-300 transition-colors">

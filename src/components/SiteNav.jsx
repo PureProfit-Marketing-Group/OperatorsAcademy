@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import UserMenu from './UserMenu';
 
 const toolsLinks = [
   { to: '/tools/install', label: 'Install the Workflow' },
@@ -95,15 +96,20 @@ export default function SiteNav() {
         >
           Marketing
         </Link>
+
+        <UserMenu />
       </div>
 
-      {/* Mobile hamburger */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="md:hidden ml-auto p-1 text-gray-400 hover:text-white"
-      >
-        {open ? <X size={20} /> : <Menu size={20} />}
-      </button>
+      {/* Mobile auth + hamburger */}
+      <div className="md:hidden ml-auto flex items-center gap-2">
+        <UserMenu />
+        <button
+          onClick={() => setOpen(!open)}
+          className="p-1 text-gray-400 hover:text-white"
+        >
+          {open ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
 
       {/* Mobile dropdown */}
       {open && (
