@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Terminal, FolderOpen, Shield, Eye, Zap, BookOpen, ArrowRight, Home, Server, TrendingUp, Bot, Crown } from 'lucide-react';
+import { Terminal, FolderOpen, Shield, Eye, Zap, BookOpen, ArrowRight, Layers, Sparkles, Palette, MessageSquare, Wrench, Brain, Copy, Check } from 'lucide-react';
 import CopyButton from './components/CopyButton';
 import Expandable from './components/Expandable';
 
-const INSTALL_CMD = 'curl -fsSL https://operators-academy.vercel.app/claude-setup/install.sh | bash';
+const TOKEN = import.meta.env.VITE_INSTALL_TOKEN || '';
+const INSTALL_CMD = `git clone https://${TOKEN}@github.com/ehoyos007/operators-academy-setup.git ~/.local/share/operators-academy && ~/.local/share/operators-academy/install.sh`;
+
+const STEP2_CMD = 'Read ~/.local/share/operators-academy/SETUP_PROMPT.md and help me set up my remaining integrations.';
+
+const UPDATE_CMD = 'cd ~/.local/share/operators-academy && git pull && ./install.sh';
 
 export default function InstallPage() {
   return (
@@ -13,33 +18,70 @@ export default function InstallPage() {
       <div className="max-w-4xl mx-auto px-4 pt-8 pb-8 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-500/20 border border-purple-500/30 rounded-full text-purple-300 text-sm mb-6">
           <Terminal size={14} />
-          One command install
+          Full toolkit install
         </div>
         <h1 className="text-3xl md:text-4xl font-bold mb-4">
-          Install the Claude Code Workflow
+          Install the Operators Academy Toolkit
         </h1>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-          Session continuity, documentation-driven development, 8 specialized agents, and a live status bar.
-          Set up in under 30 seconds.
+          19 agents, 19 skills, Vision System, hooks, status bar, and guided MCP setup.
+          Two steps, under 5 minutes.
         </p>
       </div>
 
-      {/* Install Command */}
+      {/* Step 1: Install Command */}
+      <div className="max-w-4xl mx-auto px-4 pb-6">
+        <div className="bg-gray-800 border border-gray-700 rounded-xl p-6">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-7 h-7 bg-purple-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-purple-400 text-sm font-bold">1</span>
+            </div>
+            <div>
+              <h3 className="font-semibold">Run in your terminal</h3>
+              <p className="text-xs text-gray-500">Clones the toolkit and installs everything into ~/.claude/</p>
+            </div>
+            <div className="ml-auto">
+              <CopyButton text={INSTALL_CMD} />
+            </div>
+          </div>
+          <div className="bg-gray-950 rounded-lg p-4 font-mono text-xs sm:text-sm overflow-x-auto">
+            <span className="text-gray-500">$ </span>
+            <span className="text-green-400">git clone</span>
+            <span className="text-gray-300"> https://</span>
+            <span className="text-yellow-300/70">{'<token>'}</span>
+            <span className="text-gray-300">@github.com/ehoyos007/operators-academy-setup.git</span>
+            <span className="text-gray-300"> ~/.local/share/operators-academy</span>
+            <br />
+            <span className="text-gray-500">  && </span>
+            <span className="text-gray-300">~/.local/share/operators-academy/</span>
+            <span className="text-green-400">install.sh</span>
+          </div>
+          <p className="text-xs text-gray-600 mt-3">
+            Access token is embedded in the URL. Backs up existing config before installing. Requires git and jq.
+          </p>
+        </div>
+      </div>
+
+      {/* Step 2: Claude Code Prompt */}
       <div className="max-w-4xl mx-auto px-4 pb-12">
         <div className="bg-gray-800 border border-gray-700 rounded-xl p-6">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-sm text-gray-400 font-medium">Run in your terminal:</span>
-            <CopyButton text={INSTALL_CMD} />
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-7 h-7 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-blue-400 text-sm font-bold">2</span>
+            </div>
+            <div>
+              <h3 className="font-semibold">Paste into Claude Code</h3>
+              <p className="text-xs text-gray-500">Claude walks you through Open Brain, marketing skills, and MCP integrations</p>
+            </div>
+            <div className="ml-auto">
+              <CopyButton text={STEP2_CMD} />
+            </div>
           </div>
-          <div className="bg-gray-950 rounded-lg p-4 font-mono text-sm overflow-x-auto">
-            <span className="text-gray-500">$ </span>
-            <span className="text-green-400">curl</span>
-            <span className="text-gray-300"> -fsSL https://operators-academy.vercel.app/claude-setup/install.sh </span>
-            <span className="text-gray-500">| </span>
-            <span className="text-green-400">bash</span>
+          <div className="bg-gray-950 rounded-lg p-4 font-mono text-xs sm:text-sm overflow-x-auto">
+            <span className="text-cyan-300">Read ~/.local/share/operators-academy/SETUP_PROMPT.md and help me set up my remaining integrations.</span>
           </div>
-          <p className="text-xs text-gray-500 mt-3">
-            Backs up your existing config before installing. Requires curl and jq.
+          <p className="text-xs text-gray-600 mt-3">
+            Optional. Sets up Open Brain, GitHub, Google Calendar, Gmail, Slack, Sentry, n8n, and 25 marketing skills.
           </p>
         </div>
       </div>
@@ -49,17 +91,76 @@ export default function InstallPage() {
         <h2 className="text-2xl font-bold mb-6">What you get</h2>
 
         <div className="grid md:grid-cols-2 gap-4 mb-6">
-          {/* CLAUDE.md */}
+          {/* 19 Agents */}
+          <div className="bg-gray-800 border border-gray-700 rounded-xl p-5">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 bg-cyan-500/20 rounded-lg">
+                <Shield className="text-cyan-400" size={20} />
+              </div>
+              <h3 className="font-semibold">19 Specialized Agents</h3>
+            </div>
+            <p className="text-sm text-gray-400 mb-3">
+              QA, testing, DevOps, frontend, UI design, rapid prototyping, sprint planning,
+              API testing, UX research, performance benchmarking, and more.
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {['backend-architect', 'git-commit', 'qa-orchestrator', 'debugger', 'devops-automator', 'frontend-developer', 'ui-designer', 'rapid-prototyper'].map(a => (
+                <span key={a} className="text-xs bg-gray-700 px-2 py-0.5 rounded">{a}</span>
+              ))}
+              <span className="text-xs text-gray-500 px-2 py-0.5">+11 more</span>
+            </div>
+          </div>
+
+          {/* 19 Skills */}
           <div className="bg-gray-800 border border-gray-700 rounded-xl p-5">
             <div className="flex items-center gap-3 mb-3">
               <div className="p-2 bg-purple-500/20 rounded-lg">
-                <FolderOpen className="text-purple-400" size={20} />
+                <Sparkles className="text-purple-400" size={20} />
+              </div>
+              <h3 className="font-semibold">19 Skills</h3>
+            </div>
+            <p className="text-sm text-gray-400 mb-3">
+              Compound engineering, frontend design, code review, copywriting, copy editing,
+              browser automation, PDF/DOCX generation, vision system, and more.
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {['compound-engineering', 'frontend-design', 'code-review', 'copywriting', 'dev-browser', 'init-vision'].map(s => (
+                <span key={s} className="text-xs bg-gray-700 px-2 py-0.5 rounded">/{s}</span>
+              ))}
+              <span className="text-xs text-gray-500 px-2 py-0.5">+13 more</span>
+            </div>
+          </div>
+
+          {/* Vision System */}
+          <div className="bg-gray-800 border border-gray-700 rounded-xl p-5">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 bg-amber-500/20 rounded-lg">
+                <Eye className="text-amber-400" size={20} />
+              </div>
+              <h3 className="font-semibold">Vision System</h3>
+            </div>
+            <p className="text-sm text-gray-400 mb-3">
+              VISION.md captures your project intent and decision defaults. EVAL.md keeps development aligned.
+              Run <code className="text-amber-300">/init-vision</code> to bootstrap with a brain dump interview.
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {['VISION.md', 'EVAL.md', '/init-vision', '/vision-check', '/vision-adoption'].map(f => (
+                <span key={f} className="text-xs bg-gray-700 px-2 py-0.5 rounded">{f}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Doc System */}
+          <div className="bg-gray-800 border border-gray-700 rounded-xl p-5">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 bg-green-500/20 rounded-lg">
+                <FolderOpen className="text-green-400" size={20} />
               </div>
               <h3 className="font-semibold">5-File Documentation System</h3>
             </div>
             <p className="text-sm text-gray-400 mb-3">
-              CONTEXT.md, TASKS.md, PLAN.md, PROGRESS.md, and TEST_LOG.md.
               Claude reads these at the start of each session so it never loses context.
+              Say <code className="text-green-300">"initialize project"</code> to create them.
             </p>
             <div className="flex flex-wrap gap-1.5">
               {['CONTEXT', 'TASKS', 'PLAN', 'PROGRESS', 'TEST_LOG'].map(f => (
@@ -68,17 +169,17 @@ export default function InstallPage() {
             </div>
           </div>
 
-          {/* Status Line */}
+          {/* Status Bar + Hooks */}
           <div className="bg-gray-800 border border-gray-700 rounded-xl p-5">
             <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-green-500/20 rounded-lg">
-                <Eye className="text-green-400" size={20} />
+              <div className="p-2 bg-blue-500/20 rounded-lg">
+                <Layers className="text-blue-400" size={20} />
               </div>
-              <h3 className="font-semibold">Live Status Bar</h3>
+              <h3 className="font-semibold">Status Bar + Hooks</h3>
             </div>
             <p className="text-sm text-gray-400 mb-3">
-              See your model, context usage, git branch, and project name in real-time
-              at the bottom of your terminal.
+              Live status bar shows model, context usage, git branch, and project name.
+              iTerm2 hooks turn your tab gold when Claude is waiting for input.
             </p>
             <div className="bg-gray-950 rounded-lg px-3 py-2 font-mono text-xs">
               <span className="text-purple-400">Opus 4.6</span>
@@ -90,69 +191,50 @@ export default function InstallPage() {
             </div>
           </div>
 
-          {/* Trigger Phrases */}
-          <div className="bg-gray-800 border border-gray-700 rounded-xl p-5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-blue-500/20 rounded-lg">
-                <Zap className="text-blue-400" size={20} />
-              </div>
-              <h3 className="font-semibold">Natural Language Triggers</h3>
-            </div>
-            <p className="text-sm text-gray-400 mb-3">
-              Say phrases like "wrap up", "run QA", or "let's continue" and Claude
-              automatically takes the right action.
-            </p>
-            <div className="space-y-1 text-xs">
-              <div className="flex gap-2">
-                <code className="text-blue-300">"initialize project"</code>
-                <span className="text-gray-500">creates all doc files</span>
-              </div>
-              <div className="flex gap-2">
-                <code className="text-blue-300">"wrap up"</code>
-                <span className="text-gray-500">logs session to PROGRESS.md</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Settings */}
+          {/* Settings + Triggers */}
           <div className="bg-gray-800 border border-gray-700 rounded-xl p-5">
             <div className="flex items-center gap-3 mb-3">
               <div className="p-2 bg-orange-500/20 rounded-lg">
-                <Server className="text-orange-400" size={20} />
+                <Wrench className="text-orange-400" size={20} />
               </div>
-              <h3 className="font-semibold">Base Configuration</h3>
+              <h3 className="font-semibold">Settings + Triggers</h3>
             </div>
             <p className="text-sm text-gray-400 mb-3">
-              Pre-configured settings.json with status line integration and tool search enabled.
-              Won't overwrite your existing settings.
+              High effort mode, agent teams, official plugins (Playwright, claude-md-management, frontend-design).
+              Natural language triggers like <code className="text-orange-300">"wrap up"</code> and <code className="text-orange-300">"run QA"</code>.
             </p>
-            <div className="text-xs text-gray-500">
-              Existing settings.json is preserved if found.
+            <div className="flex flex-wrap gap-1.5">
+              {['High effort', 'Agent teams', '3 plugins', 'Trigger phrases'].map(f => (
+                <span key={f} className="text-xs bg-gray-700 px-2 py-0.5 rounded">{f}</span>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* 8 Agents */}
-        <div className="bg-gray-800 border border-gray-700 rounded-xl p-6">
-          <h3 className="font-semibold text-lg mb-4 flex items-center gap-3">
-            <Shield className="text-cyan-400" size={20} />
-            8 Specialized Agents
+        {/* MCP Integrations via Step 2 */}
+        <div className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-6">
+          <h3 className="font-semibold text-lg mb-3 flex items-center gap-3">
+            <Brain className="text-purple-400" size={20} />
+            MCP Integrations (Step 2)
           </h3>
+          <p className="text-sm text-gray-400 mb-4">
+            After the base install, Claude Code walks you through connecting these services:
+          </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { name: 'backend-architect', desc: 'API & DB design', color: 'purple' },
-              { name: 'test-runner', desc: 'Doc-aware testing', color: 'orange' },
-              { name: 'test-writer-fixer', desc: 'Write & fix tests', color: 'cyan' },
-              { name: 'git-commit', desc: 'Auto commit/push', color: 'green' },
-              { name: 'qa-orchestrator', desc: 'Full QA cycle', color: 'purple' },
-              { name: 'feature-tester', desc: 'Feature QA', color: 'blue' },
-              { name: 'debugger', desc: 'Root cause analysis', color: 'red' },
-              { name: 'logger', desc: 'Observability', color: 'yellow' },
-            ].map(a => (
-              <div key={a.name} className="bg-gray-900 rounded-lg p-3">
-                <div className={`w-2 h-2 rounded-full bg-${a.color}-400 mb-2`}></div>
-                <div className="text-sm font-medium">{a.name}</div>
-                <div className="text-xs text-gray-500">{a.desc}</div>
+              { name: 'Open Brain', desc: 'Semantic knowledge system', color: 'purple' },
+              { name: 'Marketing Skills', desc: '25 AI marketing tools', color: 'teal' },
+              { name: 'GitHub', desc: 'Issues, PRs, code search', color: 'gray' },
+              { name: 'Google Calendar', desc: 'Events, free time', color: 'blue' },
+              { name: 'Gmail', desc: 'Search, read, draft', color: 'red' },
+              { name: 'Slack', desc: 'Channels, messages', color: 'green' },
+              { name: 'Sentry', desc: 'Error investigation', color: 'orange' },
+              { name: 'n8n', desc: 'Automation workflows', color: 'pink' },
+            ].map(i => (
+              <div key={i.name} className="bg-gray-900 rounded-lg p-3">
+                <div className={`w-2 h-2 rounded-full bg-${i.color}-400 mb-2`}></div>
+                <div className="text-sm font-medium">{i.name}</div>
+                <div className="text-xs text-gray-500">{i.desc}</div>
               </div>
             ))}
           </div>
@@ -172,7 +254,7 @@ export default function InstallPage() {
               <h3 className="font-semibold mb-1">Start any project</h3>
               <p className="text-sm text-gray-400">
                 Open Claude Code in a project directory. Say <code className="text-blue-300">"initialize project"</code> to
-                create the 5 documentation files. Claude reads them automatically at the start of each session.
+                create the 5 documentation files. Say <code className="text-blue-300">/init-vision</code> to set up the Vision System.
               </p>
             </div>
           </div>
@@ -195,11 +277,12 @@ export default function InstallPage() {
               <span className="text-blue-400 text-sm font-bold">3</span>
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Use agents for quality</h3>
+              <h3 className="font-semibold mb-1">Use skills and agents</h3>
               <p className="text-sm text-gray-400">
-                Say <code className="text-blue-300">"run QA"</code> to trigger the testing cycle, or
-                <code className="text-blue-300"> "debug this"</code> to activate the debugger agent.
-                The git-commit agent runs in the background after every change.
+                Use <code className="text-blue-300">/compound-engineering</code> for systematic development,
+                <code className="text-blue-300"> /frontend-design</code> for production UIs,
+                <code className="text-blue-300"> /code-review</code> for quality checks.
+                Say <code className="text-blue-300">"run QA"</code> to trigger the full testing cycle.
               </p>
             </div>
           </div>
@@ -230,18 +313,33 @@ export default function InstallPage() {
               <ul className="list-disc list-inside space-y-1 pl-2">
                 <li><code className="text-gray-300">~/.claude/CLAUDE.md</code> — Global instructions file</li>
                 <li><code className="text-gray-300">~/.claude/statusline-command.sh</code> — Status bar script</li>
-                <li><code className="text-gray-300">~/.claude/settings.json</code> — Only created if missing</li>
-                <li><code className="text-gray-300">~/.claude/agents/*.md</code> — 8 agent definition files</li>
+                <li><code className="text-gray-300">~/.claude/settings.json</code> — Merged with hooks, plugins, and settings</li>
+                <li><code className="text-gray-300">~/.claude/agents/*.md</code> — 19 agent definitions</li>
+                <li><code className="text-gray-300">~/.claude/skills/*/SKILL.md</code> — 19 skill definitions</li>
+                <li><code className="text-gray-300">~/.claude/hooks/</code> — iTerm2 notification scripts</li>
+                <li><code className="text-gray-300">~/.claude/vision-templates/</code> — VISION.md + EVAL.md templates</li>
+                <li><code className="text-gray-300">~/.claude/commands/</code> — /init-vision command</li>
               </ul>
+              <p>The toolkit source stays at <code className="text-gray-300">~/.local/share/operators-academy/</code> for updates.</p>
               <p>Any existing files are backed up to <code className="text-gray-300">~/.claude/backups/</code> before being replaced.</p>
             </div>
           </Expandable>
 
           <Expandable title="Will it overwrite my existing settings?">
             <div className="text-sm text-gray-400 space-y-2">
-              <p><strong className="text-gray-200">settings.json is preserved</strong> — if you already have one, the installer won't touch it.</p>
+              <p><strong className="text-gray-200">settings.json is merged</strong> — your existing settings are preserved and the installer adds hooks, plugins, and effort level on top (requires jq).</p>
               <p><strong className="text-gray-200">CLAUDE.md is replaced</strong> — but the original is backed up first. You can merge your custom instructions back afterward.</p>
-              <p><strong className="text-gray-200">Agents are replaced</strong> — existing agent files with the same names are overwritten (originals backed up). Agents with different names are left untouched.</p>
+              <p><strong className="text-gray-200">Agents and skills are added</strong> — existing files with the same names are overwritten (originals backed up). Files with different names are left untouched.</p>
+            </div>
+          </Expandable>
+
+          <Expandable title="How do I update?">
+            <div className="text-sm text-gray-400 space-y-2">
+              <p>Run this to pull the latest version and reinstall:</p>
+              <div className="bg-gray-950 rounded-lg p-3 font-mono text-xs flex items-center justify-between gap-2">
+                <span>{UPDATE_CMD}</span>
+                <CopyButton text={UPDATE_CMD} />
+              </div>
             </div>
           </Expandable>
 
@@ -252,13 +350,11 @@ export default function InstallPage() {
                 <div className="text-gray-500"># Find your backup</div>
                 <div>ls ~/.claude/backups/</div>
                 <div className="text-gray-500 mt-2"># Restore (replace TIMESTAMP with your backup folder)</div>
-                <div>cp ~/.claude/backups/TIMESTAMP/CLAUDE.md ~/.claude/CLAUDE.md</div>
-                <div>cp ~/.claude/backups/TIMESTAMP/settings.json ~/.claude/settings.json</div>
+                <div>cp -r ~/.claude/backups/TIMESTAMP/* ~/.claude/</div>
               </div>
-              <p>Or delete the installed files manually:</p>
+              <p>Or remove the toolkit source:</p>
               <div className="bg-gray-950 rounded-lg p-3 font-mono text-xs">
-                <div>rm ~/.claude/CLAUDE.md ~/.claude/statusline-command.sh</div>
-                <div>rm ~/.claude/agents/{'{'}{'{'}backend-architect,test-runner,test-writer-fixer,git-commit,qa-orchestrator,logger,debugger,feature-tester{'}'}{'}' }.md</div>
+                <div>rm -rf ~/.local/share/operators-academy</div>
               </div>
             </div>
           </Expandable>
@@ -267,8 +363,8 @@ export default function InstallPage() {
             <div className="text-sm text-gray-400 space-y-2">
               <ul className="list-disc list-inside space-y-1 pl-2">
                 <li><strong className="text-gray-200">Claude Code</strong> — installed and authenticated (<code className="text-gray-300">npm install -g @anthropic-ai/claude-code</code>)</li>
-                <li><strong className="text-gray-200">curl</strong> — for the installer (comes pre-installed on macOS and most Linux)</li>
-                <li><strong className="text-gray-200">jq</strong> — for the status line (<code className="text-gray-300">brew install jq</code> on macOS)</li>
+                <li><strong className="text-gray-200">git</strong> — for cloning the toolkit (pre-installed on macOS)</li>
+                <li><strong className="text-gray-200">jq</strong> — for settings merge and status line (<code className="text-gray-300">brew install jq</code> on macOS)</li>
               </ul>
             </div>
           </Expandable>
@@ -278,7 +374,8 @@ export default function InstallPage() {
               <p>Everything is plain text files — customize freely:</p>
               <ul className="list-disc list-inside space-y-1 pl-2">
                 <li>Edit <code className="text-gray-300">~/.claude/CLAUDE.md</code> to add your own trigger phrases or conventions</li>
-                <li>Edit agents in <code className="text-gray-300">~/.claude/agents/</code> to change models, tools, or behavior</li>
+                <li>Edit agents in <code className="text-gray-300">~/.claude/agents/</code> to change behavior</li>
+                <li>Edit skills in <code className="text-gray-300">~/.claude/skills/</code> to modify skill prompts</li>
                 <li>Add project-specific CLAUDE.md files in any repo for per-project overrides</li>
               </ul>
             </div>
@@ -286,79 +383,21 @@ export default function InstallPage() {
         </div>
       </div>
 
-      {/* Next Steps */}
-      <div className="max-w-4xl mx-auto px-4 pb-12">
-        <h2 className="text-2xl font-bold mb-6">Next steps</h2>
-        <div className="grid md:grid-cols-2 gap-4">
-          <Link
-            to="/setup/marketing"
-            className="group bg-gray-800 border border-gray-700 rounded-xl p-5 hover:border-teal-500 transition-all hover:shadow-lg hover:shadow-teal-500/10"
-          >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-teal-500/20 rounded-lg">
-                <TrendingUp className="text-teal-400" size={20} />
-              </div>
-              <h3 className="font-semibold">Marketing Skills</h3>
-            </div>
-            <p className="text-sm text-gray-400 mb-3">
-              25 AI-powered marketing skills — copywriting, SEO, CRO, ads, email, and growth.
-            </p>
-            <div className="text-teal-400 text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
-              Set up <ArrowRight size={14} />
-            </div>
-          </Link>
-          <Link
-            to="/setup/openclaw"
-            className="group bg-gray-800 border border-gray-700 rounded-xl p-5 hover:border-orange-500 transition-all hover:shadow-lg hover:shadow-orange-500/10"
-          >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-orange-500/20 rounded-lg">
-                <Bot className="text-orange-400" size={20} />
-              </div>
-              <h3 className="font-semibold">OpenClaw Agent</h3>
-            </div>
-            <p className="text-sm text-gray-400 mb-3">
-              Run a personal AI agent 24/7 for under $10/month on a VPS or locally.
-            </p>
-            <div className="text-orange-400 text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
-              Set up <ArrowRight size={14} />
-            </div>
-          </Link>
-        </div>
-      </div>
-
-      {/* Premium upsell */}
-      <div className="max-w-4xl mx-auto px-4 pb-12">
-        <div className="bg-gradient-to-r from-amber-900/20 to-orange-900/20 border border-amber-500/30 rounded-xl p-6">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="p-2 bg-amber-500/20 rounded-lg">
-              <Crown className="text-amber-400" size={20} />
-            </div>
-            <h3 className="font-semibold text-lg">Want more?</h3>
-          </div>
-          <p className="text-sm text-gray-400 mb-4">
-            Unlock 18 more skills, 11 agents, iTerm2 hooks, the Vision System, and settings upgrades with the Premium Toolkit.
-          </p>
-          <Link
-            to="/tools/premium"
-            className="inline-flex items-center gap-2 text-amber-400 text-sm hover:text-amber-300 transition-colors"
-          >
-            Explore Premium <ArrowRight size={14} />
-          </Link>
-        </div>
-      </div>
-
-      {/* CTA */}
+      {/* Bottom CTA */}
       <div className="max-w-4xl mx-auto px-4 pb-16">
         <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-xl p-8 text-center">
           <h2 className="text-xl font-bold mb-3">Ready to install?</h2>
-          <div className="bg-gray-950 rounded-lg p-4 font-mono text-sm max-w-2xl mx-auto mb-4 flex items-center justify-between gap-4">
-            <div className="overflow-x-auto">
+          <p className="text-sm text-gray-400 mb-5">One terminal command, then one Claude Code prompt.</p>
+          <div className="bg-gray-950 rounded-lg p-4 font-mono text-xs sm:text-sm max-w-2xl mx-auto mb-4 flex items-center justify-between gap-4">
+            <div className="overflow-x-auto text-left">
               <span className="text-gray-500">$ </span>
-              <span className="text-green-400">curl</span>
-              <span className="text-gray-300"> -fsSL https://operators-academy.vercel.app/claude-setup/install.sh </span>
-              <span className="text-gray-500">| </span>
-              <span className="text-green-400">bash</span>
+              <span className="text-green-400">git clone</span>
+              <span className="text-gray-300"> https://</span>
+              <span className="text-yellow-300/70">{'<token>'}</span>
+              <span className="text-gray-300">@github.com/...operators-academy-setup.git ~/.local/share/operators-academy</span>
+              <span className="text-gray-500"> && </span>
+              <span className="text-gray-300">~/.local/share/operators-academy/</span>
+              <span className="text-green-400">install.sh</span>
             </div>
             <CopyButton text={INSTALL_CMD} />
           </div>
