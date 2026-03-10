@@ -38,6 +38,18 @@ export function AuthProvider({ children }) {
 
   const isAuthenticated = user && !isVerificationExpired();
 
+  const tier = user?.user_metadata?.tier || 'free';
+  const isPremium = tier === 'premium';
+
+  const refreshTier = useCallback(async () => {
+    const { data, error } = await supabase.auth.refreshSession();
+    if (data?.session) {
+      setSession(data.session);
+      setUser(data.session.user);
+    }
+    return { data, error };
+  }, []);
+
   const signUp = async (email, password, fullName) => {
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -102,6 +114,9 @@ export function AuthProvider({ children }) {
       loading,
       isAuthenticated,
       isVerificationExpired: isVerificationExpired(),
+      tier,
+      isPremium,
+      refreshTier,
       signUp,
       signIn,
       signInWithGoogle,

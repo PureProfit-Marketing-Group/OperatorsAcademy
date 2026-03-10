@@ -1,9 +1,10 @@
 import React from 'react';
 import { Lock, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import PremiumUpsell from './PremiumUpsell';
 
-export default function GatedRoute({ children }) {
-  const { isAuthenticated, loading, openAuthModal, isVerificationExpired, resendVerification } = useAuth();
+export default function GatedRoute({ children, requiredTier = 'free' }) {
+  const { isAuthenticated, isPremium, loading, openAuthModal, isVerificationExpired, resendVerification } = useAuth();
 
   if (loading) {
     return (
@@ -55,6 +56,10 @@ export default function GatedRoute({ children }) {
         </div>
       </div>
     );
+  }
+
+  if (requiredTier === 'premium' && !isPremium) {
+    return <PremiumUpsell />;
   }
 
   return children;

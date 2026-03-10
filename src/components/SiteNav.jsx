@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Crown } from 'lucide-react';
 import UserMenu from './UserMenu';
 
 const toolsLinks = [
@@ -10,6 +10,7 @@ const toolsLinks = [
   { to: '/tools/mission-control', label: 'Mission Control' },
   { to: '/tools/session-monitor', label: 'Session Monitor' },
   { to: '/tools/coop', label: 'Co-Op Mode' },
+  { to: '/tools/premium', label: 'Premium Toolkit', premium: true },
 ];
 
 const allMobileLinks = [
@@ -22,6 +23,7 @@ const allMobileLinks = [
   { to: '/setup/marketing', label: 'Marketing Setup' },
   { to: '/setup/openclaw', label: 'OpenClaw Setup' },
   { to: '/tools/coop', label: 'Co-Op Mode' },
+  { to: '/tools/premium', label: 'Premium Toolkit', premium: true },
 ];
 
 export default function SiteNav() {
@@ -72,15 +74,18 @@ export default function SiteNav() {
           </button>
           {toolsOpen && (
             <div className="absolute top-8 right-0 bg-gray-950 border border-gray-800 rounded-lg py-1 min-w-[200px] shadow-xl">
-              {toolsLinks.map(({ to, label }) => (
+              {toolsLinks.map(({ to, label, premium }) => (
                 <Link
                   key={to}
                   to={to}
                   onClick={() => setToolsOpen(false)}
                   className={`block px-4 py-2 text-sm transition-colors ${
-                    isActive(to) ? 'text-white bg-gray-900' : 'text-gray-400 hover:text-white hover:bg-gray-900'
+                    premium
+                      ? isActive(to) ? 'text-amber-300 bg-gray-900' : 'text-amber-400/80 hover:text-amber-300 hover:bg-gray-900'
+                      : isActive(to) ? 'text-white bg-gray-900' : 'text-gray-400 hover:text-white hover:bg-gray-900'
                   }`}
                 >
+                  {premium && <Crown size={12} className="inline mr-1.5 -mt-0.5" />}
                   {label}
                 </Link>
               ))}
@@ -114,15 +119,18 @@ export default function SiteNav() {
       {/* Mobile dropdown */}
       {open && (
         <div className="absolute top-12 left-0 right-0 bg-gray-950 border-b border-gray-800 md:hidden">
-          {allMobileLinks.map(({ to, label }) => (
+          {allMobileLinks.map(({ to, label, premium }) => (
             <Link
               key={to}
               to={to}
               onClick={() => setOpen(false)}
               className={`block px-4 py-3 text-sm transition-colors ${
-                isActive(to) ? 'text-white bg-gray-900' : 'text-gray-400 hover:text-white hover:bg-gray-900'
+                premium
+                  ? isActive(to) ? 'text-amber-300 bg-gray-900' : 'text-amber-400/80 hover:text-amber-300 hover:bg-gray-900'
+                  : isActive(to) ? 'text-white bg-gray-900' : 'text-gray-400 hover:text-white hover:bg-gray-900'
               }`}
             >
+              {premium && <Crown size={12} className="inline mr-1.5 -mt-0.5" />}
               {label}
             </Link>
           ))}

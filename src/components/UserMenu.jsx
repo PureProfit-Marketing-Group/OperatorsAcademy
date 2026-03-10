@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { LogOut, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { LogOut, User, Settings } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export default function UserMenu() {
@@ -53,6 +54,14 @@ export default function UserMenu() {
             <p className="text-sm text-white font-medium truncate">{displayName}</p>
             <p className="text-xs text-gray-500 truncate">{user.email}</p>
           </div>
+          <Link
+            to="/settings"
+            onClick={() => setOpen(false)}
+            className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 transition-colors"
+          >
+            <Settings size={14} />
+            Settings
+          </Link>
           <button
             onClick={async () => { await signOut(); setOpen(false); }}
             className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 transition-colors"

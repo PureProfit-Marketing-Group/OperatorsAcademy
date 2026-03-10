@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Terminal, FolderOpen, Shield, Eye, Zap, BookOpen, ArrowRight, Home, Server, TrendingUp, Bot } from 'lucide-react';
+import { Terminal, FolderOpen, Shield, Eye, Zap, BookOpen, ArrowRight, Home, Server, TrendingUp, Bot, Crown } from 'lucide-react';
 import CopyButton from './components/CopyButton';
 import Expandable from './components/Expandable';
 
@@ -323,6 +323,27 @@ export default function InstallPage() {
             <div className="text-orange-400 text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
               Set up <ArrowRight size={14} />
             </div>
+          </Link>
+        </div>
+      </div>
+
+      {/* Premium upsell */}
+      <div className="max-w-4xl mx-auto px-4 pb-12">
+        <div className="bg-gradient-to-r from-amber-900/20 to-orange-900/20 border border-amber-500/30 rounded-xl p-6">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="p-2 bg-amber-500/20 rounded-lg">
+              <Crown className="text-amber-400" size={20} />
+            </div>
+            <h3 className="font-semibold text-lg">Want more?</h3>
+          </div>
+          <p className="text-sm text-gray-400 mb-4">
+            Unlock 18 more skills, 11 agents, iTerm2 hooks, the Vision System, and settings upgrades with the Premium Toolkit.
+          </p>
+          <Link
+            to="/tools/premium"
+            className="inline-flex items-center gap-2 text-amber-400 text-sm hover:text-amber-300 transition-colors"
+          >
+            Explore Premium <ArrowRight size={14} />
           </Link>
         </div>
       </div>

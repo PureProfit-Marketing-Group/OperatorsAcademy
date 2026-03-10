@@ -1,58 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Lock, Eye, FileText, Gauge, Layers, Shield, RotateCcw, ClipboardCheck, Compass, Target, Terminal } from 'lucide-react';
-
-const EXPECTED_HASH = 'ae5ce162888ee3ebe974976cac5ab94a3f55049f8515884883d579fb3fa378d2';
-
-async function hashPassword(value) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
-  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-function PasswordGate({ onUnlock }) {
-  const [input, setInput] = useState('');
-  const [error, setError] = useState(false);
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const hex = await hashPassword(input);
-    if (hex === EXPECTED_HASH) {
-      localStorage.setItem('vs-auth', 'true');
-      onUnlock();
-    } else {
-      setError(true);
-      setInput('');
-    }
-  }
-
-  return (
-    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="max-w-sm w-full mx-4">
-        <div className="bg-gray-800 border border-gray-700 rounded-xl p-8 text-center">
-          <div className="inline-flex items-center justify-center p-3 bg-purple-500/20 rounded-full mb-4">
-            <Lock className="text-purple-400" size={28} />
-          </div>
-          <h1 className="text-xl font-bold mb-2">Vision System Guide</h1>
-          <p className="text-gray-400 text-sm mb-6">Enter password to continue.</p>
-          <input
-            type="password"
-            value={input}
-            onChange={e => { setInput(e.target.value); setError(false); }}
-            placeholder="Password"
-            autoFocus
-            className="w-full px-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 mb-3"
-          />
-          {error && <p className="text-red-400 text-sm mb-3">Wrong password.</p>}
-          <button
-            type="submit"
-            className="w-full px-4 py-3 bg-purple-600 hover:bg-purple-500 rounded-lg font-medium transition-colors"
-          >
-            Unlock
-          </button>
-        </div>
-      </form>
-    </div>
-  );
-}
+import React, { useEffect } from 'react';
+import { Eye, FileText, Gauge, Layers, Shield, RotateCcw, ClipboardCheck, Compass, Target, Terminal } from 'lucide-react';
 
 function Section({ icon: Icon, title, color, children }) {
   return (
@@ -343,23 +290,12 @@ function CheatSheet() {
           </div>
         </Section>
 
-        {/* Footer */}
-        <div className="text-center pt-4 border-t border-gray-800">
-          <button
-            onClick={() => { localStorage.removeItem('vs-auth'); window.location.reload(); }}
-            className="text-xs text-gray-600 hover:text-gray-400 transition-colors"
-          >
-            Lock page
-          </button>
-        </div>
       </div>
     </div>
   );
 }
 
 export default function VisionSystemGuide() {
-  const [unlocked, setUnlocked] = useState(() => localStorage.getItem('vs-auth') === 'true');
-
   useEffect(() => {
     const meta = document.createElement('meta');
     meta.name = 'robots';
@@ -368,6 +304,5 @@ export default function VisionSystemGuide() {
     return () => document.head.removeChild(meta);
   }, []);
 
-  if (!unlocked) return <PasswordGate onUnlock={() => setUnlocked(true)} />;
   return <CheatSheet />;
 }

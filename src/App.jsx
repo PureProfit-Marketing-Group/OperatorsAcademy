@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, Link, Navigate, useLocation } from 'react-router-dom'
-import { BookOpen, Terminal, TrendingUp, Bot, Download, Zap, Monitor, Globe, Users, ArrowRight, ChevronRight, Eye } from 'lucide-react'
+import { BookOpen, Terminal, TrendingUp, Bot, Download, Zap, Monitor, Globe, Users, ArrowRight, ChevronRight, Eye, Crown, Code, Layout, Workflow } from 'lucide-react'
 import { AuthProvider } from './context/AuthContext'
 import AuthModal from './components/AuthModal'
 import CookieBanner from './components/CookieBanner'
@@ -24,6 +24,8 @@ import SessionMonitorPage from './SessionMonitorPage'
 import ClaudeCodeGuide from './ClaudeCodeGuide'
 import CoopPage from './CoopPage'
 import VisionSystemGuide from './VisionSystemGuide'
+import PremiumToolkitPage from './PremiumToolkitPage'
+import SettingsPage from './SettingsPage'
 import PrivacyPage from './PrivacyPage'
 
 const courseModules = [
@@ -194,18 +196,53 @@ function HomePage() {
 
           <Link
             to="/tools/vision-system"
-            className="group bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-600/40 rounded-xl p-5 hover:border-gray-500 transition-all hover:shadow-lg hover:shadow-white/5 relative overflow-hidden"
+            className="group bg-gradient-to-r from-teal-900/20 to-blue-900/20 border border-teal-500/30 rounded-xl p-5 hover:border-teal-500 transition-all hover:shadow-lg hover:shadow-teal-500/10 relative overflow-hidden"
           >
-            <div className="absolute top-3 right-3 px-2 py-0.5 bg-white/5 border border-white/10 rounded text-[10px] text-gray-500 uppercase tracking-wider">
-              Locked
+            <div className="absolute top-3 right-3 px-2 py-0.5 bg-amber-500/10 border border-amber-500/20 rounded text-[10px] text-amber-400 uppercase tracking-wider">
+              Premium
             </div>
             <div className="flex items-center gap-3 mb-2">
-              <div className="p-2 bg-white/5 rounded-lg">
-                <Eye className="text-gray-400" size={20} />
+              <div className="p-2 bg-teal-500/20 rounded-lg">
+                <Eye className="text-teal-400" size={20} />
               </div>
-              <h3 className="font-semibold text-gray-300">The Vision System</h3>
+              <h3 className="font-semibold">The Vision System</h3>
             </div>
-            <p className="text-gray-500 text-sm">Internal playbook. Password required.</p>
+            <p className="text-gray-400 text-sm">Intent engineering — close the gap between what you mean and what AI builds.</p>
+          </Link>
+        </div>
+      </div>
+
+      {/* Premium Toolkit teaser */}
+      <div className="max-w-5xl mx-auto px-6 pb-12">
+        <div className="bg-gradient-to-r from-amber-900/20 to-orange-900/20 border border-amber-500/30 rounded-xl p-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 bg-amber-500/20 rounded-lg">
+              <Crown className="text-amber-400" size={22} />
+            </div>
+            <h2 className="text-2xl font-bold">Premium Toolkit</h2>
+          </div>
+          <p className="text-gray-400 mb-6">
+            18 skills, 11 agents, hooks, the Vision System, and more — distributed via a private GitHub repo.
+          </p>
+          <div className="grid md:grid-cols-4 gap-3 mb-6">
+            {[
+              { icon: Code, title: 'Compound Engineering', desc: 'Systematic AI dev loop', color: 'purple' },
+              { icon: Layout, title: 'Frontend Design', desc: 'Production-grade UI gen', color: 'blue' },
+              { icon: Eye, title: 'Vision System', desc: 'Intent engineering', color: 'teal' },
+              { icon: Workflow, title: 'Dev Browser', desc: 'Browser automation', color: 'cyan' },
+            ].map(({ icon: Icon, title, desc, color }) => (
+              <div key={title} className="bg-gray-800/50 border border-gray-700/50 rounded-lg p-3">
+                <Icon className={`text-${color}-400 mb-2`} size={18} />
+                <div className="text-sm font-medium">{title}</div>
+                <div className="text-xs text-gray-500">{desc}</div>
+              </div>
+            ))}
+          </div>
+          <Link
+            to="/tools/premium"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-amber-600 text-white rounded-lg font-medium text-sm hover:bg-amber-500 transition-colors"
+          >
+            Explore Premium <ArrowRight size={16} />
           </Link>
         </div>
       </div>
@@ -255,7 +292,11 @@ export default function App() {
         <Route path="/tools/session-monitor" element={<GatedRoute><SessionMonitorPage /></GatedRoute>} />
         <Route path="/tools/claude-code-guide" element={<GatedRoute><ClaudeCodeGuide /></GatedRoute>} />
         <Route path="/tools/coop" element={<GatedRoute><CoopPage /></GatedRoute>} />
-        <Route path="/tools/vision-system" element={<GatedRoute><VisionSystemGuide /></GatedRoute>} />
+        <Route path="/tools/premium" element={<GatedRoute requiredTier="premium"><PremiumToolkitPage /></GatedRoute>} />
+        <Route path="/tools/vision-system" element={<GatedRoute requiredTier="premium"><VisionSystemGuide /></GatedRoute>} />
+
+        {/* Settings — gated */}
+        <Route path="/settings" element={<GatedRoute><SettingsPage /></GatedRoute>} />
 
         {/* Privacy — public */}
         <Route path="/privacy" element={<PrivacyPage />} />
