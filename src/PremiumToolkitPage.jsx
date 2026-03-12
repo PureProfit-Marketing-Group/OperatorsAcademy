@@ -2,7 +2,8 @@ import React from 'react';
 import { Crown, Terminal, Code, Eye, Layout, Workflow, Cpu, Zap, FileText, PenTool, Brain, Shield, Bell, Settings, Package, ArrowRight } from 'lucide-react';
 import GatedCopyButton from './components/GatedCopyButton';
 
-const CLONE_CMD = 'git clone https://github.com/ehoyos007/operators-academy-pro.git ~/.local/share/operators-academy-pro';
+const TOKEN = import.meta.env.VITE_PRO_INSTALL_TOKEN || '';
+const CLONE_CMD = `git clone https://${TOKEN}@github.com/ehoyos007/operators-academy-pro.git ~/.local/share/operators-academy-pro`;
 const INSTALL_CMD = '~/.local/share/operators-academy-pro/install.sh';
 const UPDATE_CMD = 'cd ~/.local/share/operators-academy-pro && git pull && ./install.sh';
 
